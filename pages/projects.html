@@ -3,30 +3,961 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI/ML Club: Projects</title>
+    <title>Projects</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            background-color: black;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* --------------------
+           SPLASH SCREEN
+        -------------------- */
+
+        .splash {
+            min-height: 100vh;
+            background-color: #050505;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        /* Put navigation/cards above animated background */
+
+        .splash nav,
+        .splash .projects {
+            position: relative;
+            z-index: 2;
+        }
+
+
+
+        /* --------------------
+           WAVE BACKGROUND
+        -------------------- */
+
+        .wave-background {
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            z-index: 0;
+
+            pointer-events: none;
+        }
+
+
+        .wave {
+            fill: none;
+
+            stroke-width: 12;
+            stroke-linecap: round;
+
+            opacity: 0.55;
+
+            transform-origin: center;
+
+            filter: blur(1px);
+        }
+
+
+
+        /* --------------------
+           WAVE COLORS
+        -------------------- */
+
+        .wave-blue {
+            stroke: #008cff;
+        }
+
+        .wave-purple {
+            stroke: #8a2be2;
+        }
+
+        .wave-orange {
+            stroke: #ff7a00;
+        }
+
+
+
+        /* --------------------
+           WAVE ANIMATIONS
+        -------------------- */
+
+        .wave-1 {
+            animation: waveMove1 12s ease-in-out infinite alternate;
+        }
+
+        .wave-2 {
+            animation: waveMove2 16s ease-in-out infinite alternate;
+        }
+
+        .wave-3 {
+            animation: waveMove3 20s ease-in-out infinite alternate;
+        }
+
+        .wave-4 {
+            animation: waveMove2 14s ease-in-out infinite alternate-reverse;
+        }
+
+        .wave-5 {
+            animation: waveMove1 18s ease-in-out infinite alternate-reverse;
+        }
+
+        .wave-6 {
+            animation: waveMove3 15s ease-in-out infinite alternate;
+        }
+
+        .wave-7 {
+            animation: waveMove2 22s ease-in-out infinite alternate-reverse;
+        }
+
+
+        /* Extra waves */
+
+        .wave-8 {
+            animation: waveMove1 17s ease-in-out infinite alternate;
+
+            stroke-width: 7;
+            opacity: 0.35;
+        }
+
+        .wave-9 {
+            animation: waveMove3 24s ease-in-out infinite alternate-reverse;
+
+            stroke-width: 18;
+            opacity: 0.25;
+        }
+
+        .wave-10 {
+            animation: waveMove2 19s ease-in-out infinite alternate;
+
+            stroke-width: 5;
+            opacity: 0.6;
+        }
+
+
+
+        @keyframes waveMove1 {
+
+            0% {
+                transform:
+                    translateX(-100px)
+                    translateY(-20px)
+                    scaleY(0.7);
+            }
+
+            50% {
+                transform:
+                    translateX(50px)
+                    translateY(30px)
+                    scaleY(1.25);
+            }
+
+            100% {
+                transform:
+                    translateX(150px)
+                    translateY(-10px)
+                    scaleY(0.85);
+            }
+
+        }
+
+
+
+        @keyframes waveMove2 {
+
+            0% {
+                transform:
+                    translateX(100px)
+                    translateY(30px)
+                    scaleY(1.1);
+            }
+
+            50% {
+                transform:
+                    translateX(-80px)
+                    translateY(-40px)
+                    scaleY(0.75);
+            }
+
+            100% {
+                transform:
+                    translateX(-150px)
+                    translateY(20px)
+                    scaleY(1.35);
+            }
+
+        }
+
+
+
+        @keyframes waveMove3 {
+
+            0% {
+                transform:
+                    translateX(-150px)
+                    scaleY(1.3);
+            }
+
+            50% {
+                transform:
+                    translateX(80px)
+                    scaleY(0.65);
+            }
+
+            100% {
+                transform:
+                    translateX(180px)
+                    scaleY(1.1);
+            }
+
+        }
+
+
+
+        /* --------------------
+        PARTICLES
+        -------------------- */
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            z-index: 1;
+
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+
+        .particle {
+            position: absolute;
+
+            width: 8px;
+            height: 8px;
+
+            opacity: 0.7;
+
+            /* irregular default shape */
+            border-radius:
+                60% 40% 55% 45% /
+                45% 60% 40% 55%;
+
+            animation: particleFloat 14s ease-in-out infinite alternate;
+        }
+
+
+        /* --------------------
+        PARTICLE SHAPES
+        -------------------- */
+
+        /* Small uneven dust speck */
+
+        .particle-speck {
+            width: 5px;
+            height: 7px;
+
+            border-radius:
+                70% 30% 60% 40% /
+                35% 60% 40% 65%;
+        }
+
+
+        /* Longer glowing streak */
+
+        .particle-streak {
+            width: 4px;
+            height: 16px;
+
+            border-radius: 40%;
+
+            transform: rotate(30deg);
+        }
+
+
+        /* Diamond / shard */
+
+        .particle-diamond {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 1px;
+
+            transform: rotate(45deg);
+        }
+
+
+        /* Chunkier uneven shape */
+
+        .particle-chunk {
+            width: 12px;
+            height: 9px;
+
+            border-radius:
+                35% 65% 45% 55% /
+                65% 35% 60% 40%;
+        }
+
+
+
+        /* --------------------
+        COLORS
+        -------------------- */
+
+        .particle-blue {
+            background-color: #008cff;
+            box-shadow:
+                0 0 8px #008cff,
+                0 0 18px #008cff;
+        }
+
+
+        .particle-purple {
+            background-color: #9b3dff;
+            box-shadow:
+                0 0 8px #9b3dff,
+                0 0 18px #9b3dff;
+        }
+
+
+        .particle-orange {
+            background-color: #ff7a00;
+            box-shadow:
+                0 0 8px #ff7a00,
+                0 0 18px #ff7a00;
+        }
+
+
+        .particle-white {
+            background-color: #ffffff;
+
+            box-shadow:
+                0 0 6px #ffffff,
+                0 0 15px rgba(255, 255, 255, 0.8);
+        }
+
+
+
+        /* --------------------
+        PARTICLE POSITIONS
+        -------------------- */
+
+        .p1  { top: 10%; left: 5%;  animation-duration: 11s; }
+        .p2  { top: 28%; left: 11%; animation-duration: 17s; }
+        .p3  { top: 55%; left: 7%;  animation-duration: 14s; }
+        .p4  { top: 78%; left: 14%; animation-duration: 20s; }
+
+        .p5  { top: 18%; left: 21%; animation-duration: 15s; }
+        .p6  { top: 45%; left: 25%; animation-duration: 19s; }
+        .p7  { top: 68%; left: 30%; animation-duration: 13s; }
+        .p8  { top: 85%; left: 23%; animation-duration: 22s; }
+
+        .p9  { top: 8%;  left: 38%; animation-duration: 18s; }
+        .p10 { top: 30%; left: 42%; animation-duration: 12s; }
+        .p11 { top: 62%; left: 39%; animation-duration: 21s; }
+        .p12 { top: 82%; left: 46%; animation-duration: 16s; }
+
+        .p13 { top: 15%; left: 53%; animation-duration: 13s; }
+        .p14 { top: 40%; left: 57%; animation-duration: 20s; }
+        .p15 { top: 72%; left: 52%; animation-duration: 17s; }
+        .p16 { top: 90%; left: 60%; animation-duration: 23s; }
+
+        .p17 { top: 7%;  left: 68%; animation-duration: 14s; }
+        .p18 { top: 27%; left: 72%; animation-duration: 19s; }
+        .p19 { top: 55%; left: 66%; animation-duration: 16s; }
+        .p20 { top: 80%; left: 75%; animation-duration: 22s; }
+
+        .p21 { top: 14%; left: 83%; animation-duration: 18s; }
+        .p22 { top: 38%; left: 88%; animation-duration: 13s; }
+        .p23 { top: 64%; left: 82%; animation-duration: 21s; }
+        .p24 { top: 87%; left: 91%; animation-duration: 15s; }
+
+        .p25 { top: 4%;  left: 28%; animation-duration: 20s; }
+        .p26 { top: 35%; left: 34%; animation-duration: 14s; }
+        .p27 { top: 50%; left: 49%; animation-duration: 18s; }
+        .p28 { top: 23%; left: 62%; animation-duration: 22s; }
+
+        .p29 { top: 76%; left: 5%;  animation-duration: 16s; }
+        .p30 { top: 92%; left: 35%; animation-duration: 19s; }
+        .p31 { top: 48%; left: 95%; animation-duration: 13s; }
+        .p32 { top: 70%; left: 94%; animation-duration: 21s; }
+
+
+
+        /* --------------------
+        PARTICLE MOVEMENT
+        -------------------- */
+
+        @keyframes particleFloat {
+
+            0% {
+                transform:
+                    translate(0px, 0px)
+                    rotate(0deg)
+                    scale(0.7);
+
+                opacity: 0.25;
+            }
+
+            35% {
+                transform:
+                    translate(30px, -25px)
+                    rotate(70deg)
+                    scale(1.1);
+
+                opacity: 0.75;
+            }
+
+            70% {
+                transform:
+                    translate(-20px, -55px)
+                    rotate(150deg)
+                    scale(0.85);
+
+                opacity: 0.45;
+            }
+
+            100% {
+                transform:
+                    translate(45px, 25px)
+                    rotate(240deg)
+                    scale(1.2);
+
+                opacity: 0.7;
+            }
+
+        }
+
+
+
+        /* --------------------
+           NAVIGATION
+        -------------------- */
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            padding: 30px 40px;
+        }
+
+
+        nav a {
+            color: #136eaa;
+            text-decoration: none;
+
+            font-size: 36px;
+        }
+
+
+        nav a:hover {
+            color: white;
+        }
+
+
+
+        /* --------------------
+           PROJECT GRID
+        -------------------- */
+
+    .projects {
+        display: grid;
+
+        grid-template-columns: repeat(4, 210px);
+
+        justify-content: center;
+
+        gap: 38px 40px;
+
+        padding-top: 60px;
+        padding-bottom: 70px;
+    }
+
+        .project-link {
+            text-decoration: none;
+        }
+
+
+        .project-card {
+            height: 140px;
+
+            background-color: rgba(255, 255, 255, 0.482);
+
+            border: 8px solid black;
+        }
+
+
+        .project-card:hover {
+            background-color: #dddddd;
+        }
+
+
+
+        /* --------------------
+           PROJECT SECTIONS
+        -------------------- */
+
+        .project-section {
+            min-height: 100vh;
+
+            padding: 100px;
+
+            color: black;
+        }
+
+
+        .project-section h2 {
+            font-size: 48px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .project-section p {
+            max-width: 800px;
+
+            font-size: 22px;
+
+            line-height: 1.6;
+        }
+
+
+
+        /* --------------------
+           SECTION COLORS
+        -------------------- */
+
+        #project1 {
+            background-color: #ff6b6b;
+        }
+
+        #project2 {
+            background-color: #ffa94d;
+        }
+
+        #project3 {
+            background-color: #ffd43b;
+        }
+
+        #project4 {
+            background-color: #69db7c;
+        }
+
+        #project5 {
+            background-color: #38d9a9;
+        }
+
+        #project6 {
+            background-color: #4dabf7;
+        }
+
+        #project7 {
+            background-color: #748ffc;
+        }
+
+        #project8 {
+            background-color: #da77f2;
+        }
+
+    </style>
+
 </head>
+
+
 <body>
-    <div id="mainProject">
-        <h2>Insert Main Project name here</h2>
-        <h3>Previous Meeting ##/##/##:</h3>
-        <p>Insert details about the previous meeting here.</p>
-        <h3>Next Meeting ##/##/##:</h3>
-        <p>Insert details about the next meeting here.</p>
-    </div>
 
-    <div id="hackathon">
-        <h3>Hackathon title here</h3>
-        <p>Hackathon details here</p>
-    </div>
 
-    <div id="indidvidualProjects">
-        <h3>Individual Projects</h3>
-        <h4>Personal Project 1:</h4>
-        <p>Project Details</p>
-        <h4>Personal Project 2:</h4>
-        <p>Project Details</p>
-        <h4>Personal Project 3</h4>
-        <p>Project Details</p>
-    </div>
+    <!-- ========================================
+         MAIN SPLASH SCREEN
+    ========================================= -->
+
+    <section class="splash">
+
+
+        <!-- --------------------
+             WAVES
+        --------------------- -->
+
+        <svg class="wave-background"
+             viewBox="0 0 1600 900"
+             preserveAspectRatio="none">
+
+
+            <!-- BLUE WAVES -->
+
+            <path class="wave wave-blue wave-1"
+                  d="M-200 250
+                     C100 50, 300 450, 600 250
+                     S1100 50, 1800 300" />
+
+
+            <path class="wave wave-blue wave-2"
+                  d="M-200 400
+                     C150 200, 350 600, 700 380
+                     S1200 180, 1800 450" />
+
+
+            <path class="wave wave-blue wave-3"
+                  d="M-200 600
+                     C200 350, 450 750, 800 550
+                     S1300 350, 1800 650" />
+
+
+
+            <!-- PURPLE WAVES -->
+
+            <path class="wave wave-purple wave-4"
+                  d="M-200 180
+                     C200 500, 400 50, 750 300
+                     S1200 550, 1800 250" />
+
+
+            <path class="wave wave-purple wave-5"
+                  d="M-200 500
+                     C150 750, 500 300, 850 550
+                     S1300 800, 1800 500" />
+
+
+
+            <!-- ORANGE WAVES -->
+
+            <path class="wave wave-orange wave-6"
+                  d="M-200 320
+                     C100 600, 400 150, 750 420
+                     S1200 650, 1800 350" />
+
+
+            <path class="wave wave-orange wave-7"
+                  d="M-200 700
+                     C200 450, 500 850, 900 650
+                     S1400 450, 1800 700" />
+
+
+
+            <!-- EXTRA WAVES -->
+
+            <path class="wave wave-purple wave-8"
+                  d="M-200 100
+                     C100 300, 350 -50, 650 170
+                     S1150 420, 1800 120" />
+
+
+            <path class="wave wave-blue wave-9"
+                  d="M-200 780
+                     C150 500, 450 950, 850 700
+                     S1400 500, 1800 820" />
+
+
+            <path class="wave wave-orange wave-10"
+                  d="M-200 520
+                     C100 250, 500 700, 900 430
+                     S1350 250, 1800 570" />
+
+
+        </svg>
+
+
+
+        <!-- --------------------
+             PARTICLES
+        --------------------- -->
+
+        <div class="particles">
+
+            <span class="particle particle-blue particle-speck p1"></span>
+            <span class="particle particle-white particle-diamond p2"></span>
+            <span class="particle particle-purple particle-streak p3"></span>
+            <span class="particle particle-orange particle-speck p4"></span>
+
+            <span class="particle particle-white particle-speck p5"></span>
+            <span class="particle particle-blue particle-chunk p6"></span>
+            <span class="particle particle-purple particle-diamond p7"></span>
+            <span class="particle particle-white particle-streak p8"></span>
+
+            <span class="particle particle-orange particle-diamond p9"></span>
+            <span class="particle particle-blue particle-speck p10"></span>
+            <span class="particle particle-white particle-chunk p11"></span>
+            <span class="particle particle-purple particle-speck p12"></span>
+
+            <span class="particle particle-blue particle-streak p13"></span>
+            <span class="particle particle-orange particle-speck p14"></span>
+            <span class="particle particle-white particle-diamond p15"></span>
+            <span class="particle particle-purple particle-chunk p16"></span>
+
+            <span class="particle particle-white particle-speck p17"></span>
+            <span class="particle particle-blue particle-diamond p18"></span>
+            <span class="particle particle-orange particle-streak p19"></span>
+            <span class="particle particle-purple particle-speck p20"></span>
+
+            <span class="particle particle-white particle-chunk p21"></span>
+            <span class="particle particle-blue particle-speck p22"></span>
+            <span class="particle particle-purple particle-diamond p23"></span>
+            <span class="particle particle-white particle-streak p24"></span>
+
+            <span class="particle particle-orange particle-speck p25"></span>
+            <span class="particle particle-white particle-diamond p26"></span>
+            <span class="particle particle-blue particle-chunk p27"></span>
+            <span class="particle particle-purple particle-streak p28"></span>
+
+            <span class="particle particle-white particle-speck p29"></span>
+            <span class="particle particle-orange particle-diamond p30"></span>
+            <span class="particle particle-blue particle-streak p31"></span>
+            <span class="particle particle-white particle-chunk p32"></span>
+
+        </div>
+
+
+
+        <!-- --------------------
+             NAVIGATION
+        --------------------- -->
+
+        <nav>
+
+            <a href="index.html">Home</a>
+
+            <a href="projects.html">Projects</a>
+
+            <a href="resources.html">Resources</a>
+
+            <a href="contact.html">Contact</a>
+
+            <a href="meetings.html">Meetings</a>
+
+        </nav>
+
+
+
+        <!-- --------------------
+             PROJECT BOXES
+        --------------------- -->
+
+        <main class="projects">
+
+
+            <a href="#project1" class="project-link">
+                <div class="project-card"></div>
+            </a>
+
+
+            <a href="#project2" class="project-link">
+                <div class="project-card"></div>
+            </a>
+
+
+            <a href="#project3" class="project-link">
+                <div class="project-card"></div>
+            </a>
+
+
+            <a href="#project4" class="project-link">
+                <div class="project-card"></div>
+            </a>
+
+
+            <a href="#project5" class="project-link">
+                <div class="project-card"></div>
+            </a>
+
+
+            <a href="#project6" class="project-link">
+                <div class="project-card"></div>
+            </a>
+
+
+            <a href="#project7" class="project-link">
+                <div class="project-card"></div>
+            </a>
+
+
+            <a href="#project8" class="project-link">
+                <div class="project-card"></div>
+            </a>
+
+
+        </main>
+
+
+    </section>
+
+
+
+    <!-- ========================================
+         PROJECT 1
+    ========================================= -->
+
+    <section id="project1" class="project-section">
+
+        <h2>Project One</h2>
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+            ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+
+    </section>
+
+
+
+    <!-- ========================================
+         PROJECT 2
+    ========================================= -->
+
+    <section id="project2" class="project-section">
+
+        <h2>Project Two</h2>
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+            ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+
+    </section>
+
+
+
+    <!-- ========================================
+         PROJECT 3
+    ========================================= -->
+
+    <section id="project3" class="project-section">
+
+        <h2>Project Three</h2>
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+            ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+
+    </section>
+
+
+
+    <!-- ========================================
+         PROJECT 4
+    ========================================= -->
+
+    <section id="project4" class="project-section">
+
+        <h2>Project Four</h2>
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+            ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+
+    </section>
+
+
+
+    <!-- ========================================
+         PROJECT 5
+    ========================================= -->
+
+    <section id="project5" class="project-section">
+
+        <h2>Project Five</h2>
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+            ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+
+    </section>
+
+
+
+    <!-- ========================================
+         PROJECT 6
+    ========================================= -->
+
+    <section id="project6" class="project-section">
+
+        <h2>Project Six</h2>
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+            ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+
+    </section>
+
+
+
+    <!-- ========================================
+         PROJECT 7
+    ========================================= -->
+
+    <section id="project7" class="project-section">
+
+        <h2>Project Seven</h2>
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+            ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+
+    </section>
+
+
+
+    <!-- ========================================
+         PROJECT 8
+    ========================================= -->
+
+    <section id="project8" class="project-section">
+
+        <h2>Project Eight</h2>
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed do eiusmod tempor incididunt ut labore et dolore magna
+            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+            ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+
+    </section>
+
+
 </body>
 </html>
