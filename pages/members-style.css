@@ -1,0 +1,17 @@
+body {
+    background-color: darkgray
+}
+div.officer{
+    border-style: solid;
+}
+p{
+    font-family: 'Arial Narrow';
+}
+div h2.position {
+    font-family: 'Brush Script MT', cursive;
+}
+img.profile{
+    width:100px; height:100px;
+    float: left;
+    border-radius: 50px;
+}
