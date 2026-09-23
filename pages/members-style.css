@@ -1,17 +1,618 @@
-body {
-    background-color: darkgray
+
+
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #050505;
+
+            color: white;
+
+            font-family: Arial, sans-serif;
+
+            min-height: 100vh;
+
+            overflow-x: hidden;
+        }
+
+
+
+        body::before {
+            content: "";
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            z-index: -2;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(0, 140, 255, 0.20),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 80% 30%,
+                    rgba(138, 43, 226, 0.18),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 50% 90%,
+                    rgba(255, 122, 0, 0.12),
+                    transparent 35%
+                ),
+
+                #050505;
+        }
+
+
+
+        header {
+            width: 100%;
+
+            text-align: center;
+
+            padding: 30px 20px 25px;
+
+            border-bottom: 2px solid rgba(0, 140, 255, 0.4);
+
+            background-color: rgba(5, 5, 5, 0.9);
+
+            box-shadow:
+                0 0 20px rgba(0, 140, 255, 0.15);
+
+            position: relative;
+
+            z-index: 5;
+        }
+
+
+        header h1 {
+            font-size: 42px;
+
+            margin-bottom: 20px;
+
+            color: white;
+
+            text-shadow:
+                0 0 8px #008cff,
+                0 0 18px rgba(0, 140, 255, 0.7);
+        }
+
+
+
+        nav {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 55px;
+        }
+
+
+        nav a {
+            color: #136eaa;
+
+            text-decoration: none;
+
+            font-size: 24px;
+
+            font-weight: bold;
+
+            padding: 8px 18px;
+
+            border: 2px solid transparent;
+
+            transition:
+                color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease,
+                background-color 0.3s ease;
+        }
+
+
+        nav a:hover {
+            color: white;
+
+            border-color: #008cff;
+
+            background-color: rgba(0, 140, 255, 0.08);
+
+            box-shadow:
+                0 0 8px #008cff,
+                0 0 18px rgba(0, 140, 255, 0.5);
+        }
+
+
+
+        main {
+            width: 100%;
+
+            padding: 70px 40px 100px;
+        }
+
+
+
+        main > h1 {
+            text-align: center;
+
+            font-size: 48px;
+
+            margin-bottom: 60px;
+
+            color: white;
+
+            text-shadow:
+                0 0 8px #8a2be2,
+                0 0 20px rgba(138, 43, 226, 0.6);
+        }
+
+
+
+        .officers {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(250px, 1fr));
+
+            gap: 40px;
+
+            max-width: 1100px;
+
+            margin: 0 auto 90px;
+        }
+
+
+
+        div#president {
+            min-height: 470px;
+
+            padding: 30px;
+
+            text-align: center;
+
+            background-color: rgba(255, 255, 255, 0.07);
+
+            border: 3px solid rgba(0, 140, 255, 0.45);
+
+            box-shadow:
+                0 0 12px rgba(0, 140, 255, 0.15);
+
+            transition:
+                transform 0.3s ease,
+                background-color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+         div#vicePresident {
+            min-height: 470px;
+
+            padding: 30px;
+
+            text-align: center;
+
+            background-color: rgba(255, 255, 255, 0.07);
+
+            border: 3px solid #8a2be2;
+
+            box-shadow:
+                0 0 12px rgba(0, 140, 255, 0.15);
+
+            transition:
+                transform 0.3s ease,
+                background-color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+         div#academicAdvisor {
+            min-height: 470px;
+
+            padding: 30px;
+
+            text-align: center;
+
+            background-color: rgba(255, 255, 255, 0.07);
+
+            border: 3px solid #ff7a00;
+
+            box-shadow:
+                0 0 12px rgba(0, 140, 255, 0.15);
+
+            transition:
+                transform 0.3s ease,
+                background-color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+
+
+        .officer:hover {
+            transform: translateY(-8px);
+
+            background-color: rgba(255, 255, 255, 0.11);
+
+            border-color: #008cff;
+
+            box-shadow:
+                0 0 12px #008cff,
+                0 0 30px rgba(0, 140, 255, 0.35);
+        }
+
+
+
+        div#president .profile {
+            width: 190px;
+
+            height: 190px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border: 5px solid #008cff;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 0 10px #008cff,
+                0 0 25px rgba(0, 140, 255, 0.55);
+        }
+            div#vicePresident .profile {
+            width: 190px;
+
+            height: 190px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border: 5px solid #8a2be2;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 0 10px #8a2be2,
+                0 0 25px rgba(138, 43, 226, 0.55);
+        }
+        div#academicAdvisor .profile {
+            width: 190px;
+
+            height: 190px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border: 5px solid #ff7a00;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 0 10px #ff7a00,
+                0 0 25px rgba(255, 122, 0, 0.55);
+        }
+
+
+
+        .position {
+            font-size: 27px;
+
+            margin-bottom: 20px;
+
+            color: white;
+
+            text-shadow:
+                0 0 7px rgba(255, 255, 255, 0.5);
+        }
+
+
+
+        .officer p {
+            color: #cccccc;
+
+            font-size: 18px;
+
+            line-height: 1.6;
+
+            margin-bottom: 15px;
+        }
+
+
+
+        .officer p:last-child {
+            color: #008cff;
+
+            font-weight: bold;
+
+            margin-top: 20px;
+
+            text-shadow:
+                0 0 7px rgba(0, 140, 255, 0.6);
+        }
+
+
+
+        #president {
+            border-color: rgba(0, 140, 255, 0.6);
+        }
+
+        #president:hover {
+            border-color: #008cff;
+
+            box-shadow:
+                0 0 15px #008cff,
+                0 0 35px rgba(0, 140, 255, 0.4);
+        }
+
+
+        #vicePresident {
+            border-color: rgba(138, 43, 226, 0.6);
+        }
+
+        #vicePresident:hover {
+            border-color: #8a2be2;
+
+            box-shadow:
+                0 0 15px #8a2be2,
+                0 0 35px rgba(138, 43, 226, 0.4);
+        }
+
+
+        #academicAdvisor {
+            border-color: rgba(255, 122, 0, 0.6);
+        }
+
+        #academicAdvisor:hover {
+            border-color: #ff7a00;
+
+            box-shadow:
+                0 0 15px #ff7a00,
+                0 0 35px rgba(255, 122, 0, 0.4);
+        }
+
+
+
+        #otherMembers {
+            max-width: 1100px;
+
+            margin: 0 auto;
+
+            padding: 40px;
+
+            text-align: center;
+
+            background-color: rgba(255, 255, 255, 0.06);
+
+            border: 3px solid rgba(255, 255, 255, 0.2);
+
+            box-shadow:
+                0 0 15px rgba(255, 255, 255, 0.08);
+        }
+
+
+        #otherMembers h1 {
+            font-size: 38px;
+
+            margin-bottom: 30px;
+
+            color: white;
+
+            text-shadow:
+                0 0 8px #00ff7bb8,
+                0 0 18px rgba(00, 255, 123, 0.5);
+        }
+
+
+        #otherMembers ul {
+            list-style: none;
+
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 15px;
+        }
+
+
+        #otherMembers li {
+            min-width: 150px;
+
+            padding: 15px 25px;
+
+            color: white;
+
+            background-color: rgba(255, 255, 255, 0.08);
+
+            border: 2px solid rgba(00, 255, 123, 0.5);
+
+            transition:
+                background-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+
+        #otherMembers li:hover {
+            background-color: rgba(00, 255, 123, 0.12);
+
+            box-shadow:
+                0 0 10px rgba(00, 255, 123, 0.5);
+        }
+
+
+
+        @media (max-width: 850px) {
+
+            .officers {
+                grid-template-columns: 1fr;
+
+                max-width: 500px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            header h1 {
+                font-size: 32px;
+            }
+
+            nav {
+                gap: 10px;
+
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                font-size: 18px;
+
+                padding: 7px 12px;
+            }
+
+            main {
+                padding: 50px 20px;
+            }
+
+            main > h1 {
+                font-size: 38px;
+            }
+
+            .officer {
+                padding: 25px 20px;
+            }
+
+            .profile {
+                width: 160px;
+
+                height: 160px;
+            }
+
+        }
+
+
+
+.site-header {
+    width: 100%;
+    background-color: #050505;
+
+    padding: 25px 40px 20px;
+
+    text-align: center;
+
+    border-bottom: 2px solid rgba(0, 140, 255, 0.35);
+
+    position: relative;
+    z-index: 10;
+
+    box-shadow:
+        0 0 15px rgba(0, 140, 255, 0.15);
 }
-div.officer{
-    border-style: solid;
+
+
+
+.site-title {
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 42px;
+    font-weight: bold;
+
+    margin-bottom: 20px;
+
+    text-shadow:
+        0 0 8px #008cff,
+        0 0 18px rgba(0, 140, 255, 0.7);
 }
-p{
-    font-family: 'Arial Narrow';
+
+
+
+.site-nav {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 60px;
 }
-div h2.position {
-    font-family: 'Brush Script MT', cursive;
+
+
+
+.site-nav a {
+    color: #136eaa;
+
+    text-decoration: none;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    padding: 8px 18px;
+
+    border: 2px solid transparent;
+
+    transition:
+        color 0.3s ease,
+        border-color 0.3s ease,
+        background-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
-img.profile{
-    width:100px; height:100px;
-    float: left;
-    border-radius: 50px;
+
+.site-nav a:hover {
+    color: white;
+
+    border-color: #008cff;
+
+    background-color: rgba(0, 140, 255, 0.08);
+
+    box-shadow:
+        0 0 8px #008cff,
+        0 0 18px rgba(0, 140, 255, 0.5);
+}
+
+
+
+@media (max-width: 600px) {
+
+    .site-header {
+        padding: 20px 15px;
+    }
+
+    .site-title {
+        font-size: 32px;
+    }
+
+    .site-nav {
+        gap: 10px;
+
+        flex-wrap: wrap;
+    }
+
+    .site-nav a {
+        font-size: 18px;
+
+        padding: 7px 12px;
+    }
+
 }
