@@ -25,40 +25,7 @@
 
 
 
-        body::before {
-            content: "";
 
-            position: fixed;
-
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            height: 100%;
-
-            z-index: -2;
-
-            background:
-                radial-gradient(
-                    circle at 20% 20%,
-                    rgba(0, 140, 255, 0.20),
-                    transparent 30%
-                ),
-
-                radial-gradient(
-                    circle at 80% 30%,
-                    rgba(138, 43, 226, 0.18),
-                    transparent 30%
-                ),
-
-                radial-gradient(
-                    circle at 50% 90%,
-                    rgba(255, 122, 0, 0.12),
-                    transparent 35%
-                ),
-
-                #050505;
-        }
 
 
 
@@ -96,48 +63,43 @@
 
 
 
+        /* Put navigation/cards above animated background */
+
+        .splash nav,
+        .splash .projects {
+            position: relative;
+            z-index: 2;
+        }
+
+
+
+        /* --------------------
+           NAVIGATION
+        -------------------- */
+
         nav {
             display: flex;
-
-            justify-content: center;
-
+            justify-content: space-between;
             align-items: center;
-
-            gap: 55px;
+            flex-wrap: wrap;
+            gap: 14px 24px;
+            max-width: 1280px;
+            margin-inline: auto;
+            padding: 28px 40px;
         }
 
 
         nav a {
-            color: #136eaa;
-
+            color: #eef0ff;
+            text-shadow: 0 1px 8px rgba(12, 6, 55, 0.7);
             text-decoration: none;
 
-            font-size: 24px;
-
-            font-weight: bold;
-
-            padding: 8px 18px;
-
-            border: 2px solid transparent;
-
-            transition:
-                color 0.3s ease,
-                border-color 0.3s ease,
-                box-shadow 0.3s ease,
-                background-color 0.3s ease;
+            font-size: clamp(1rem, 1.4vw, 1.35rem);
         }
 
 
         nav a:hover {
             color: white;
-
-            border-color: #008cff;
-
-            background-color: rgba(0, 140, 255, 0.08);
-
-            box-shadow:
-                0 0 8px #008cff,
-                0 0 18px rgba(0, 140, 255, 0.5);
         }
 
 
@@ -188,7 +150,7 @@
 
             text-align: center;
 
-            background-color: rgba(255, 255, 255, 0.07);
+            background-color: #000;
 
             border: 3px solid rgba(0, 140, 255, 0.45);
 
@@ -208,7 +170,7 @@
 
             text-align: center;
 
-            background-color: rgba(255, 255, 255, 0.07);
+            background-color: #000;
 
             border: 3px solid #8a2be2;
 
@@ -228,7 +190,7 @@
 
             text-align: center;
 
-            background-color: rgba(255, 255, 255, 0.07);
+            background-color: #000;
 
             border: 3px solid #ff7a00;
 
@@ -247,7 +209,7 @@
         .officer:hover {
             transform: translateY(-8px);
 
-            background-color: rgba(255, 255, 255, 0.11);
+            background-color: #000;
 
             border-color: #008cff;
 
@@ -409,7 +371,7 @@
 
             text-align: center;
 
-            background-color: rgba(255, 255, 255, 0.06);
+            background-color: #000;
 
             border: 3px solid rgba(255, 255, 255, 0.2);
 
@@ -451,7 +413,7 @@
 
             color: white;
 
-            background-color: rgba(255, 255, 255, 0.08);
+            background-color: #000;
 
             border: 2px solid rgba(00, 255, 123, 0.5);
 
@@ -462,7 +424,7 @@
 
 
         #otherMembers li:hover {
-            background-color: rgba(00, 255, 123, 0.12);
+            background-color: #000;
 
             box-shadow:
                 0 0 10px rgba(00, 255, 123, 0.5);
@@ -548,6 +510,9 @@
     font-size: 42px;
     font-weight: bold;
 
+    text-align: center;
+    margin-top: 30px;
+
     margin-bottom: 20px;
 
     text-shadow:
@@ -625,4 +590,45 @@
         padding: 7px 12px;
     }
 
+}
+/* Shared homepage/projects navigation: no extra header padding or panel. */
+header.site-header {
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    text-align: initial;
+    position: relative;
+    z-index: 2;
+}
+.site-header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px 24px;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding: 28px 40px;
+}
+.site-header nav a {
+    color: #eef0ff;
+    text-shadow: 0 1px 8px rgba(12, 6, 55, 0.7);
+    text-decoration: none;
+    font-size: clamp(1rem, 1.4vw, 1.35rem);
+    padding: 0;
+}
+.site-header nav a:hover { color: white; }
+
+/* Keep the waves behind the entire members page as it scrolls. */
+body { position: relative; isolation: isolate; }
+
+/* Opaque member cards keep the animated background outside their surfaces. */
+div.officer,
+div.officer:hover,
+#otherMembers,
+#otherMembers li,
+#otherMembers li:hover {
+    background-color: #000;
 }
