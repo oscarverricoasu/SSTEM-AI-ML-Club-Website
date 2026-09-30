@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            background-color: black;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* --------------------
+           SPLASH SCREEN
+        -------------------- */
+
+        .splash {
+            min-height: 100vh;
+            background-color: #302477;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        /* Put navigation/cards above animated background */
+
+        .splash nav,
+        .splash .projects {
+            position: relative;
+            z-index: 2;
+        }
+
+
+
+        /* --------------------
+           NAVIGATION
+        -------------------- */
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px 24px;
+            max-width: 1280px;
+            margin-inline: auto;
+            padding: 28px 40px;
+        }
+
+
+        nav a {
+            color: #eef0ff;
+            text-shadow: 0 1px 8px rgba(12, 6, 55, 0.7);
+            text-decoration: none;
+
+            font-size: clamp(1rem, 1.4vw, 1.35rem);
+        }
+
+
+        nav a:hover {
+            color: white;
+        }
+
+
+
+        /* --------------------
+           TYPED HOMEPAGE MESSAGE
+        -------------------- */
+
+        .hero-copy {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            color: white;
+            text-align: center;
+            white-space: nowrap;
+            text-shadow: 0 3px 28px rgba(0, 0, 0, 0.95);
+        }
+
+        .hero-title,
+        .hero-subtitle {
+            position: relative;
+            width: max-content;
+            max-width: 96vw;
+            margin-inline: auto;
+            line-height: 1.1;
+        }
+
+        .hero-title {
+            font-size: clamp(1rem, 4.6vw, 4.5rem);
+        }
+
+        .hero-subtitle {
+            margin-top: 1rem;
+            font-size: clamp(0.8rem, 2.2vw, 2rem);
+            font-weight: normal;
+        }
+
+        .title-guide {
+            visibility: hidden;
+        }
+
+        .typed-text {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .typed-text.is-typing {
+            border-right: 0.06em solid white;
+            padding-right: 0.04em;
+            animation: caretBlink 0.75s step-end infinite;
+        }
+
+        @keyframes caretBlink {
+            50% { border-color: transparent; }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================================
+         MAIN SPLASH SCREEN
+    ========================================= -->
+
+    <section class="splash">
+
+
+        <!-- --------------------
+             WAVES
+        --------------------- -->
+
+        <canvas class="wave-background" aria-hidden="true"></canvas>
+
+
+
+        <!-- --------------------
+             NAVIGATION
+        --------------------- -->
+
+        <nav>
+
+            <a href="index.html">Home</a>
+
+            <a href="projects.html">Projects</a>
+
+            <a href="resources.html">Resources</a>
+
+            <a href="contact.html">Contact</a>
+
+            <a href="meetings.html">Meetings</a>
+
+        </nav>
+
+        <div class="hero-copy">
+            <h1 class="hero-title" aria-label="The Singularity is Coming.">
+                <span class="title-guide" aria-hidden="true">The Singularity is Coming.</span>
+                <span class="typed-text" aria-hidden="true"></span>
+            </h1>
+            <p class="hero-subtitle" aria-label="Tuesdays 6:30-7:30 Anne Belk 311">
+                <span class="title-guide" aria-hidden="true">Tuesdays 6:30-7:30 Anne Belk 311</span>
+                <span class="typed-text" aria-hidden="true"></span>
+            </p>
+        </div>
+
+    </section>
+
+    <script src="waves.js" defer></script>
+    <script>
+        const headline = "The Singularity is Coming.";
+        const subtitle = "Tuesdays 6:30-7:30 Anne Belk 311";
+        const headlineText = document.querySelector(".hero-title .typed-text");
+        const subtitleText = document.querySelector(".hero-subtitle .typed-text");
+
+        function typeLine(element, words, onComplete) {
+            let characterIndex = 0;
+            element.classList.add("is-typing");
+            const typing = setInterval(() => {
+                element.textContent += words[characterIndex++];
+                if (characterIndex === words.length) {
+                    clearInterval(typing);
+                    if (onComplete) onComplete();
+                }
+            }, 95);
+        }
+
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            headlineText.textContent = headline;
+            subtitleText.textContent = subtitle;
+        } else {
+            setTimeout(() => {
+                typeLine(headlineText, headline, () => {
+                    setTimeout(() => {
+                        headlineText.classList.remove("is-typing");
+                        typeLine(subtitleText, subtitle);
+                    }, 700);
+                });
+            }, 400);
+        }
+    </script>
+</body>
+</html>
