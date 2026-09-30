@@ -1,0 +1,340 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #302477;
+    color: #eef0ff;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+
+
+
+.meetings-page {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.meetings-page canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+
+
+
+nav {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 14px 24px;
+
+    max-width: 1280px;
+    margin-inline: auto;
+    padding: 28px 40px;
+}
+
+nav a {
+    color: #eef0ff;
+    text-shadow: 0 1px 8px rgba(12, 6, 55, 0.7);
+
+    text-decoration: none;
+    font-size: clamp(1rem, 1.4vw, 1.35rem);
+}
+
+nav a:hover {
+    color: white;
+}
+
+
+
+
+main {
+    position: relative;
+    z-index: 1;
+
+    width: min(1100px, 92%);
+    margin: 0 auto;
+
+    padding: 45px 0 80px;
+}
+
+
+
+
+.section {
+    margin-bottom: 65px;
+}
+
+.section-title {
+    margin-bottom: 25px;
+
+    color: white;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 600;
+
+    text-shadow: 0 3px 20px rgba(0, 0, 0, 0.65);
+}
+
+
+
+
+.upcoming-card {
+    padding: 35px;
+
+    background: rgba(15, 10, 55, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 18px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(8px);
+}
+
+.meeting-date {
+    color: #c7c2ff;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+
+    margin-bottom: 10px;
+}
+
+.meeting-title {
+    color: white;
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    margin-bottom: 15px;
+}
+
+.meeting-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 30px;
+
+    margin-bottom: 20px;
+
+    color: #d8d6ef;
+    font-size: 1.05rem;
+}
+
+.meeting-description {
+    max-width: 750px;
+
+    color: #e7e5f7;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+
+/* --------------------
+       PREVIOUS MEETINGS
+    -------------------- */
+
+.previous-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.previous-meeting {
+    display: grid;
+    grid-template-columns: 180px 1fr auto;
+    align-items: center;
+    gap: 25px;
+
+    padding: 22px 25px;
+
+    background: rgba(15, 10, 55, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+
+    backdrop-filter: blur(6px);
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.previous-meeting:hover {
+    background: rgba(25, 18, 75, 0.75);
+    transform: translateY(-2px);
+}
+
+.previous-date {
+    color: #c7c2ff;
+    font-weight: bold;
+}
+
+.previous-info h3 {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+}
+
+.previous-info p {
+    color: #c9c6df;
+    line-height: 1.5;
+}
+
+.meeting-link {
+    color: #ffffff;
+    text-decoration: none;
+
+    padding: 9px 15px;
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.meeting-link:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* --------------------
+EXPANDABLE CONTENT
+-------------------- */
+
+.meeting-expanded {
+display: none;
+
+grid-column: 1 / -1;
+
+margin-top: 10px;
+padding-top: 20px;
+
+border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+color: #d8d6ef;
+line-height: 1.6;
+
+
+}
+
+/* Show content when meeting is expanded */
+
+.previous-meeting.expanded .meeting-expanded {
+display: block;
+}
+
+/* --------------------
+MEETING RESOURCES
+-------------------- */
+
+.meeting-expanded h4 {
+margin-top: 20px;
+margin-bottom: 12px;
+
+color: white;
+font-size: 1.05rem;
+
+
+}
+
+/* Put resource links next to each other */
+
+.meeting-links {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+}
+
+/* Individual resource links */
+
+.meeting-links a {
+display: inline-block;
+
+padding: 10px 16px;
+
+color: #eef0ff;
+text-decoration: none;
+
+background-color: rgba(255, 255, 255, 0.07);
+
+border: 1px solid rgba(255, 255, 255, 0.25);
+border-radius: 8px;
+
+transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+
+
+}
+
+.meeting-links a:hover {
+background-color: rgba(255, 255, 255, 0.15);
+
+border-color: rgba(255, 255, 255, 0.6);
+
+transform: translateY(-1px);
+
+
+}
+
+/* --------------------
+MOBILE
+-------------------- */
+
+@media (max-width: 700px) {
+
+.meeting-expanded {
+    grid-column: 1;
+}
+
+.meeting-links {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+}
+
+@media (max-width: 700px) {
+
+    nav {
+        justify-content: center;
+        padding: 24px 20px;
+    }
+
+    main {
+        padding-top: 30px;
+    }
+
+    .upcoming-card {
+        padding: 25px;
+    }
+
+    .previous-meeting {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .meeting-link {
+        width: fit-content;
+    }
+}
