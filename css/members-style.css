@@ -1,485 +1,519 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
+html {
+    scroll-behavior: smooth;
+}
 
+body {
+    background-color: #050505;
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    color: white;
 
-        html {
-            scroll-behavior: smooth;
-        }
+    font-family: Arial, sans-serif;
 
-        body {
-            background-color: #050505;
+    min-height: 100vh;
 
-            color: white;
+    overflow-x: hidden;
+}
 
-            font-family: Arial, sans-serif;
 
-            min-height: 100vh;
 
-            overflow-x: hidden;
-        }
+body::before {
+    content: "";
 
+    position: fixed;
 
+    top: 0;
+    left: 0;
 
+    width: 100%;
+    height: 100%;
 
+    z-index: -2;
 
+    background:
+        radial-gradient(circle at 20% 20%,
+            rgba(0, 140, 255, 0.20),
+            transparent 30%),
 
+        radial-gradient(circle at 80% 30%,
+            rgba(138, 43, 226, 0.18),
+            transparent 30%),
 
-        header {
-            width: 100%;
+        radial-gradient(circle at 50% 90%,
+            rgba(255, 122, 0, 0.12),
+            transparent 35%),
 
-            text-align: center;
+        #050505;
+}
 
-            padding: 30px 20px 25px;
 
-            border-bottom: 2px solid rgba(255, 234, 0, 0.675);
 
-            background-color: rgba(5, 5, 5, 0.9);
+header {
+    width: 100%;
 
-            box-shadow:
-                0 0 20px rgba(255, 234, 0, 0.15);
+    text-align: center;
 
-            position: relative;
+    padding: 30px 20px 25px;
 
-            z-index: 5;
-        }
+    border-bottom: 2px solid rgba(255, 234, 0, 0.675);
 
+    background-color: rgba(5, 5, 5, 0.9);
 
-        header h1 {
-            font-size: 42px;
+    box-shadow:
+        0 0 20px rgba(255, 234, 0, 0.15);
 
-            margin-bottom: 20px;
+    position: relative;
 
-            color: white;
+    z-index: 5;
+}
 
-            text-shadow:
-                0 0 8px rgba(255, 234, 0, 0.675),
-                0 0 18px rgba(255, 234, 0, 0.15);
-        }
 
+header h1 {
+    font-size: 42px;
 
+    margin-bottom: 20px;
 
-        /* Put navigation/cards above animated background */
+    color: white;
 
-        .splash nav,
-        .splash .projects {
-            position: relative;
-            z-index: 2;
-        }
+    text-shadow:
+        0 0 8px rgba(255, 234, 0, 0.675),
+        0 0 18px rgba(255, 234, 0, 0.15);
+}
 
 
 
-        /* --------------------
-           NAVIGATION
-        -------------------- */
+nav {
+    display: flex;
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 14px 24px;
-            max-width: 1280px;
-            margin-inline: auto;
-            padding: 28px 40px;
-        }
+    justify-content: center;
 
+    align-items: center;
 
-        nav a {
-            color: #eef0ff;
-            text-shadow: 0 1px 8px rgba(12, 6, 55, 0.7);
-            text-decoration: none;
+    gap: 55px;
+}
 
-            font-size: clamp(1rem, 1.4vw, 1.35rem);
-        }
 
+nav a {
+    color: #136eaa;
 
-        nav a:hover {
-            color: white;
-        }
+    text-decoration: none;
 
+    font-size: 24px;
 
+    font-weight: bold;
 
-        main {
-            width: 100%;
+    padding: 8px 18px;
 
-            padding: 70px 40px 100px;
-        }
+    border: 2px solid transparent;
 
+    transition:
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background-color 0.3s ease;
+}
 
 
-        main > h1 {
-            text-align: center;
+nav a:hover {
+    color: white;
 
-            font-size: 48px;
+    border-color: #008cff;
 
-            margin-bottom: 60px;
+    background-color: rgba(0, 140, 255, 0.08);
 
-            color: white;
+    box-shadow:
+        0 0 8px #008cff,
+        0 0 18px rgba(0, 140, 255, 0.5);
+}
 
-            text-shadow:
-                0 0 8px #8a2be2,
-                0 0 20px rgba(138, 43, 226, 0.6);
-        }
 
 
+main {
+    width: 100%;
 
-        .officers {
-            display: grid;
+    padding: 70px 40px 100px;
+}
 
-            grid-template-columns:
-                repeat(3, minmax(250px, 1fr));
 
-            gap: 40px;
 
-            max-width: 1100px;
+main>h1 {
+    text-align: center;
 
-            margin: 0 auto 90px;
-        }
+    font-size: 48px;
 
+    margin-bottom: 60px;
 
+    color: white;
 
-        div#president {
-            min-height: 470px;
+    text-shadow:
+        0 0 8px #8a2be2,
+        0 0 20px rgba(138, 43, 226, 0.6);
+}
 
-            padding: 30px;
 
-            text-align: center;
 
-            background-color: #000;
+.officers {
+    display: grid;
 
-            border: 3px solid rgba(0, 140, 255, 0.45);
+    grid-template-columns:
+        repeat(3, minmax(250px, 1fr));
 
-            box-shadow:
-                0 0 12px rgba(0, 140, 255, 0.15);
+    gap: 40px;
 
-            transition:
-                transform 0.3s ease,
-                background-color 0.3s ease,
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
-        }
-         div#vicePresident {
-            min-height: 470px;
+    max-width: 1100px;
 
-            padding: 30px;
+    margin: 0 auto 90px;
+}
 
-            text-align: center;
 
-            background-color: #000;
 
-            border: 3px solid #8a2be2;
+div#president {
+    min-height: 470px;
 
-            box-shadow:
-                0 0 12px rgba(0, 140, 255, 0.15);
+    padding: 30px;
 
-            transition:
-                transform 0.3s ease,
-                background-color 0.3s ease,
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
-        }
-         div#academicAdvisor {
-            min-height: 470px;
+    text-align: center;
 
-            padding: 30px;
+    background-color: rgba(255, 255, 255, 0.07);
 
-            text-align: center;
+    border: 3px solid rgba(0, 140, 255, 0.45);
 
-            background-color: #000;
+    box-shadow:
+        0 0 12px rgba(0, 140, 255, 0.15);
 
-            border: 3px solid #ff7a00;
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
 
-            box-shadow:
-                0 0 12px rgba(0, 140, 255, 0.15);
+div#vicePresident {
+    min-height: 470px;
 
-            transition:
-                transform 0.3s ease,
-                background-color 0.3s ease,
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
-        }
+    padding: 30px;
 
+    text-align: center;
 
+    background-color: rgba(255, 255, 255, 0.07);
 
-        .officer:hover {
-            transform: translateY(-8px);
+    border: 3px solid #8a2be2;
 
-            background-color: #000;
+    box-shadow:
+        0 0 12px rgba(0, 140, 255, 0.15);
 
-            border-color: #008cff;
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
 
-            box-shadow:
-                0 0 12px #008cff,
-                0 0 30px rgba(0, 140, 255, 0.35);
-        }
+div#academicAdvisor {
+    min-height: 470px;
 
+    padding: 30px;
 
+    text-align: center;
 
-        div#president .profile {
-            width: 190px;
+    background-color: rgba(255, 255, 255, 0.07);
 
-            height: 190px;
+    border: 3px solid #ff7a00;
 
-            object-fit: cover;
+    box-shadow:
+        0 0 12px rgba(0, 140, 255, 0.15);
 
-            border-radius: 50%;
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
 
-            border: 5px solid #008cff;
 
-            margin-bottom: 25px;
 
-            box-shadow:
-                0 0 10px #008cff,
-                0 0 25px rgba(0, 140, 255, 0.55);
-        }
-            div#vicePresident .profile {
-            width: 190px;
+.officer:hover {
+    transform: translateY(-8px);
 
-            height: 190px;
+    background-color: rgba(255, 255, 255, 0.11);
 
-            object-fit: cover;
+    border-color: #008cff;
 
-            border-radius: 50%;
+    box-shadow:
+        0 0 12px #008cff,
+        0 0 30px rgba(0, 140, 255, 0.35);
+}
 
-            border: 5px solid #8a2be2;
 
-            margin-bottom: 25px;
 
-            box-shadow:
-                0 0 10px #8a2be2,
-                0 0 25px rgba(138, 43, 226, 0.55);
-        }
-        div#academicAdvisor .profile {
-            width: 190px;
+div#president .profile {
+    width: 190px;
 
-            height: 190px;
+    height: 190px;
 
-            object-fit: cover;
+    object-fit: cover;
 
-            border-radius: 50%;
+    border-radius: 50%;
 
-            border: 5px solid #ff7a00;
+    border: 5px solid #008cff;
 
-            margin-bottom: 25px;
+    margin-bottom: 25px;
 
-            box-shadow:
-                0 0 10px #ff7a00,
-                0 0 25px rgba(255, 122, 0, 0.55);
-        }
+    box-shadow:
+        0 0 10px #008cff,
+        0 0 25px rgba(0, 140, 255, 0.55);
+}
 
+div#vicePresident .profile {
+    width: 190px;
 
+    height: 190px;
 
-        .position {
-            font-size: 27px;
+    object-fit: cover;
 
-            margin-bottom: 10px;
+    border-radius: 50%;
 
-            color: white;
+    border: 5px solid #8a2be2;
 
-            text-shadow:
-                0 0 7px rgba(255, 255, 255, 0.5);
-        }
-        .officerName{
-            font-size: 50px;
+    margin-bottom: 25px;
 
-            margin-bottom: 20px;
+    box-shadow:
+        0 0 10px #8a2be2,
+        0 0 25px rgba(138, 43, 226, 0.55);
+}
 
-            color: white;
+div#academicAdvisor .profile {
+    width: 190px;
 
-            text-shadow:
-                0 0 7px rgba(255, 255, 255, 0.5);
-        }
+    height: 190px;
 
+    object-fit: cover;
 
+    border-radius: 50%;
 
-        .officer p {
-            color: #cccccc;
+    border: 5px solid #ff7a00;
 
-            font-size: 18px;
+    margin-bottom: 25px;
 
-            line-height: 1.6;
+    box-shadow:
+        0 0 10px #ff7a00,
+        0 0 25px rgba(255, 122, 0, 0.55);
+}
 
-            margin-bottom: 15px;
-        }
 
 
+.position {
+    font-size: 27px;
 
-        .officer p:last-child {
-            color: #008cff;
+    margin-bottom: 10px;
 
-            font-weight: bold;
+    color: white;
 
-            margin-top: 20px;
+    text-shadow:
+        0 0 7px rgba(255, 255, 255, 0.5);
+}
 
-            text-shadow:
-                0 0 7px rgba(0, 140, 255, 0.6);
-        }
+.officerName {
+    font-size: 50px;
 
+    margin-bottom: 20px;
 
+    color: white;
 
-        #president {
-            border-color: rgba(0, 140, 255, 0.6);
-        }
+    text-shadow:
+        0 0 7px rgba(255, 255, 255, 0.5);
+}
 
-        #president:hover {
-            border-color: #008cff;
 
-            box-shadow:
-                0 0 15px #008cff,
-                0 0 35px rgba(0, 140, 255, 0.4);
-        }
 
+.officer p {
+    color: #cccccc;
 
-        #vicePresident {
-            border-color: rgba(138, 43, 226, 0.6);
-        }
+    font-size: 18px;
 
-        #vicePresident:hover {
-            border-color: #8a2be2;
+    line-height: 1.6;
 
-            box-shadow:
-                0 0 15px #8a2be2,
-                0 0 35px rgba(138, 43, 226, 0.4);
-        }
+    margin-bottom: 15px;
+}
 
 
-        #academicAdvisor {
-            border-color: rgba(255, 122, 0, 0.6);
-        }
 
-        #academicAdvisor:hover {
-            border-color: #ff7a00;
+.officer p:last-child {
+    color: #008cff;
 
-            box-shadow:
-                0 0 15px #ff7a00,
-                0 0 35px rgba(255, 122, 0, 0.4);
-        }
+    font-weight: bold;
 
+    margin-top: 20px;
 
+    text-shadow:
+        0 0 7px rgba(0, 140, 255, 0.6);
+}
 
-        #otherMembers {
-            max-width: 1100px;
 
-            margin: 0 auto;
 
-            padding: 40px;
+#president {
+    border-color: rgba(0, 140, 255, 0.6);
+}
 
-            text-align: center;
+#president:hover {
+    border-color: #008cff;
 
-            background-color: #000;
+    box-shadow:
+        0 0 15px #008cff,
+        0 0 35px rgba(0, 140, 255, 0.4);
+}
 
-            border: 3px solid rgba(255, 255, 255, 0.2);
 
-            box-shadow:
-                0 0 15px rgba(255, 255, 255, 0.08);
-        }
+#vicePresident {
+    border-color: rgba(138, 43, 226, 0.6);
+}
 
+#vicePresident:hover {
+    border-color: #8a2be2;
 
-        #otherMembers h1 {
-            font-size: 38px;
+    box-shadow:
+        0 0 15px #8a2be2,
+        0 0 35px rgba(138, 43, 226, 0.4);
+}
 
-            margin-bottom: 30px;
 
-            color: white;
+#academicAdvisor {
+    border-color: rgba(255, 122, 0, 0.6);
+}
 
-            text-shadow:
-                0 0 8px #00ff7bb8,
-                0 0 18px rgba(00, 255, 123, 0.5);
-        }
+#academicAdvisor:hover {
+    border-color: #ff7a00;
 
+    box-shadow:
+        0 0 15px #ff7a00,
+        0 0 35px rgba(255, 122, 0, 0.4);
+}
 
-        #otherMembers ul {
-            list-style: none;
 
-            display: flex;
 
-            justify-content: center;
+#otherMembers {
+    max-width: 1100px;
 
-            flex-wrap: wrap;
+    margin: 0 auto;
 
-            gap: 15px;
-        }
+    padding: 40px;
 
+    text-align: center;
 
-        #otherMembers li {
-            min-width: 150px;
+    background-color: rgba(255, 255, 255, 0.06);
 
-            padding: 15px 25px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
 
-            color: white;
+    box-shadow:
+        0 0 15px rgba(255, 255, 255, 0.08);
+}
 
-            background-color: #000;
 
-            border: 2px solid rgba(00, 255, 123, 0.5);
+#otherMembers h1 {
+    font-size: 38px;
 
-            transition:
-                background-color 0.3s ease,
-                box-shadow 0.3s ease;
-        }
+    margin-bottom: 30px;
 
+    color: white;
 
-        #otherMembers li:hover {
-            background-color: #000;
+    text-shadow:
+        0 0 8px #00ff7bb8,
+        0 0 18px rgba(00, 255, 123, 0.5);
+}
 
-            box-shadow:
-                0 0 10px rgba(00, 255, 123, 0.5);
-        }
 
+#otherMembers ul {
+    list-style: none;
 
+    display: flex;
 
-        @media (max-width: 850px) {
+    justify-content: center;
 
-            .officers {
-                grid-template-columns: 1fr;
+    flex-wrap: wrap;
 
-                max-width: 500px;
-            }
+    gap: 15px;
+}
 
-        }
 
+#otherMembers li {
+    min-width: 150px;
 
-        @media (max-width: 600px) {
+    padding: 15px 25px;
 
-            header h1 {
-                font-size: 32px;
-            }
+    color: white;
 
-            nav {
-                gap: 10px;
+    background-color: rgba(255, 255, 255, 0.08);
 
-                flex-wrap: wrap;
-            }
+    border: 2px solid rgba(00, 255, 123, 0.5);
 
-            nav a {
-                font-size: 18px;
+    transition:
+        background-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
 
-                padding: 7px 12px;
-            }
 
-            main {
-                padding: 50px 20px;
-            }
+#otherMembers li:hover {
+    background-color: rgba(00, 255, 123, 0.12);
 
-            main > h1 {
-                font-size: 38px;
-            }
+    box-shadow:
+        0 0 10px rgba(00, 255, 123, 0.5);
+}
 
-            .officer {
-                padding: 25px 20px;
-            }
 
-            .profile {
-                width: 160px;
 
-                height: 160px;
-            }
+@media (max-width: 850px) {
 
-        }
+    .officers {
+        grid-template-columns: 1fr;
+
+        max-width: 500px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 32px;
+    }
+
+    nav {
+        gap: 10px;
+
+        flex-wrap: wrap;
+    }
+
+    nav a {
+        font-size: 18px;
+
+        padding: 7px 12px;
+    }
+
+    main {
+        padding: 50px 20px;
+    }
+
+    main>h1 {
+        font-size: 38px;
+    }
+
+    .officer {
+        padding: 25px 20px;
+    }
+
+    .profile {
+        width: 160px;
+
+        height: 160px;
+    }
+
+}
 
 
 
@@ -509,9 +543,6 @@
 
     font-size: 42px;
     font-weight: bold;
-
-    text-align: center;
-    margin-top: 30px;
 
     margin-bottom: 20px;
 
@@ -590,45 +621,4 @@
         padding: 7px 12px;
     }
 
-}
-/* Shared homepage/projects navigation: no extra header padding or panel. */
-header.site-header {
-    width: 100%;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
-    text-align: initial;
-    position: relative;
-    z-index: 2;
-}
-.site-header nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 14px 24px;
-    max-width: 1280px;
-    margin-inline: auto;
-    padding: 28px 40px;
-}
-.site-header nav a {
-    color: #eef0ff;
-    text-shadow: 0 1px 8px rgba(12, 6, 55, 0.7);
-    text-decoration: none;
-    font-size: clamp(1rem, 1.4vw, 1.35rem);
-    padding: 0;
-}
-.site-header nav a:hover { color: white; }
-
-/* Keep the waves behind the entire members page as it scrolls. */
-body { position: relative; isolation: isolate; }
-
-/* Opaque member cards keep the animated background outside their surfaces. */
-div.officer,
-div.officer:hover,
-#otherMembers,
-#otherMembers li,
-#otherMembers li:hover {
-    background-color: #000;
 }
