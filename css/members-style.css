@@ -87,49 +87,36 @@ header h1 {
 
 
 
+
 nav {
+    position: relative;
+    z-index: 2;
+
     display: flex;
-
-    justify-content: center;
-
+    justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 
-    gap: 55px;
+    gap: 14px 24px;
+
+    max-width: 1280px;
+    margin-inline: auto;
+    padding: 28px 40px;
 }
-
 
 nav a {
-    color: #136eaa;
+    color: #eef0ff;
+    text-shadow: 0 1px 8px rgba(12, 6, 55, 0.7);
 
     text-decoration: none;
-
-    font-size: 24px;
-
-    font-weight: bold;
-
-    padding: 8px 18px;
-
-    border: 2px solid transparent;
-
-    transition:
-        color 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease,
-        background-color 0.3s ease;
+    font-size: clamp(1rem, 1.4vw, 1.35rem);
 }
-
 
 nav a:hover {
     color: white;
-
-    border-color: #008cff;
-
-    background-color: rgba(0, 140, 255, 0.08);
-
-    box-shadow:
-        0 0 8px #008cff,
-        0 0 18px rgba(0, 140, 255, 0.5);
 }
+
+
 
 
 
