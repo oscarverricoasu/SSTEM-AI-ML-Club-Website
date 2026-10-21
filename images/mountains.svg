@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice">
+  <rect width="1440" height="900" fill="#111312"/>
+  <path d="M0 760 180 650 320 700 520 560 720 720 960 570 1140 670 1300 540 1440 650V900H0Z" fill="#20231d"/>
+  <path d="M0 840 230 750 400 810 650 700 860 820 1080 710 1260 790 1440 720V900H0Z" fill="#191d17"/>
+</svg>

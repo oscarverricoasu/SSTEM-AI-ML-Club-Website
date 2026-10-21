@@ -6,6 +6,8 @@
 
 <title>Meetings</title>
 
+    <link rel="stylesheet" href="../css/themes.css">
+    <script src="../scripts/theme.js"></script>
 </head> <body> <section class="meetings-page">
 <canvas class="wave-background" aria-hidden="true"></canvas>
 
@@ -24,6 +26,14 @@
 
     <a href="/pages/meetings.html">Meetings</a>
 
+    <div class="theme-control">
+        <button class="theme-toggle" type="button" aria-expanded="false" aria-controls="theme-options">Theme</button>
+        <div class="theme-options" id="theme-options" hidden>
+            <button type="button" data-theme-option="original" aria-pressed="false">Original</button>
+            <button type="button" data-theme-option="appstate" aria-pressed="false">App State</button>
+            <button type="button" data-theme-option="classic" aria-pressed="false">Classic</button>
+        </div>
+    </div>
 </nav>
 
 <script src="../scripts/details.js" defer></script>
