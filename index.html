@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
 
 
+    <link rel="stylesheet" href="./css/themes.css">
+    <script src="./scripts/theme.js"></script>
 </head>
 
 
@@ -42,7 +44,15 @@
 
             <a href="./pages/meetings.html">Meetings</a>
 
-        </nav>
+            <div class="theme-control">
+        <button class="theme-toggle" type="button" aria-expanded="false" aria-controls="theme-options">Theme</button>
+        <div class="theme-options" id="theme-options" hidden>
+            <button type="button" data-theme-option="original" aria-pressed="false">Original</button>
+            <button type="button" data-theme-option="appstate" aria-pressed="false">App State</button>
+            <button type="button" data-theme-option="classic" aria-pressed="false">Classic</button>
+        </div>
+    </div>
+</nav>
 
         <div class="hero-copy">
             <h1 class="hero-title" aria-label="The Singularity is Coming.">

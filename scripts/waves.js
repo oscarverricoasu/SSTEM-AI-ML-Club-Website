@@ -6,12 +6,17 @@
 (() => {
     "use strict";
 
+    const variant = document.querySelector("canvas.wave-background")?.dataset.variant;
+    const palettes = {
+        projects: ["0.46, 0.075, 0.20", "1.0, 0.36, 0.10", "0.98, 0.27, 0.49", "1.0, 0.52, 0.23", "1.0, 0.46, 0.68", "0.97, 0.30, 0.53"],
+        members: ["0.005, 0.010, 0.020", "0.025, 0.28, 0.78", "0.045, 0.39, 0.95", "0.08, 0.47, 1.0", "0.32, 0.65, 1.0", "0.02, 0.23, 0.58"]
+    };
     // Adjust these to change the background.
     const water = {
         speed: 1.0,       // Larger = faster flow down and to the right.
         turbulence: 1.0, // Shape changes: 0 = gliding, 1 = lively, 2 = stronger.
-        ripples: 6.0,     // Number of broad ripples across the screen height.
-        brightness: 0.95,
+        ripples: variant === "projects" ? 5.0 : 6.0,     // Number of broad ripples across the screen height.
+        brightness: variant === "projects" ? 0.75 : 0.95,
         pixelRatio: 1.25  // Resolution cap to keep the animation lightweight.
     };
 
@@ -40,7 +45,7 @@
         void main() {
             // Coordinates start at the top left. Subtracting time makes the
             // surface travel toward positive x/y: down and to the right.
-            vec2 uv = vec2(v_uv.x, 1.0 - v_uv.y);
+            vec2 uv = (vec2(v_uv.x, 1.0 - v_uv.y) - 0.5) / ${variant ? "2.0" : "1.0"} + 0.5;
             vec2 p = vec2(uv.x * u_resolution.x / u_resolution.y, uv.y);
             p -= vec2(0.045, 0.035) * u_time;
 
@@ -63,17 +68,17 @@
             float crest = pow(swell, 6.0 + 10.0 * (0.5 + 0.5 * sin(p.x * 4.0 + p.y * 7.0 - t * 0.57)));
             float glint = pow(swell, 55.0);
 
-            vec3 deep = vec3(0.16, 0.075, 0.46);
-            vec3 blue = vec3(0.24, 0.29, 0.94);
+            vec3 deep = vec3(${palettes[variant]?.[0] ?? "0.16, 0.075, 0.46"});
+            vec3 blue = vec3(${palettes[variant]?.[1] ?? "0.24, 0.29, 0.94"});
             vec3 color = mix(deep, blue, 0.5 + 0.5 * sin(phase - 0.95));
             float light = 0.75 + 0.25 * sin(p.x * 2.4 - p.y * 3.0 + 0.7 + t * 0.31);
-            color = mix(color, vec3(0.51, 0.27, 0.98), shoulder * 0.55);
+            color = mix(color, vec3(${palettes[variant]?.[2] ?? "0.51, 0.27, 0.98"}), shoulder * 0.55);
 
             float cool = smoothstep(0.05, 0.95, uv.x + 0.10 * sin(p.y * 4.0 + t * 0.23));
-            vec3 reflected = mix(vec3(1.0, 0.38, 0.49), vec3(0.64, 0.69, 1.0), cool);
+            vec3 reflected = mix(vec3(${palettes[variant]?.[3] ?? "1.0, 0.38, 0.49"}), vec3(${palettes[variant]?.[4] ?? "0.64, 0.69, 1.0"}), cool);
             color = mix(color, reflected, crest * light * 0.78);
             color += reflected * shoulder * 0.12 + glint * 0.035;
-            color = mix(color, vec3(0.26, 0.55, 0.97),
+            color = mix(color, vec3(${palettes[variant]?.[5] ?? "0.26, 0.55, 0.97"}),
                         0.30 * (1.0 - uv.y) * uv.x);
 
             // Gentle falloff keeps the lettering legible without a visible box.
@@ -88,9 +93,9 @@
     const style = document.createElement("style");
     style.textContent = `
         .wave-background {
-            position: absolute; inset: 0; width: 100%; height: 100%;
-            z-index: 0; pointer-events: none;
-            background: linear-gradient(155deg, #694dea, #3435b6 45%, #42237c);
+            position: ${variant === "members" ? "fixed" : "absolute"}; inset: 0; width: 100%; height: 100%;
+            z-index: ${variant === "members" ? "-1" : "0"}; pointer-events: none;
+            background: ${variant === "members" ? "linear-gradient(155deg, #030509, #123d85 45%, #050d1c)" : variant === "projects" ? "linear-gradient(155deg, #e66b39, #bc385f 45%, #77243e)" : "linear-gradient(155deg, #694dea, #3435b6 45%, #42237c)"};
         }
     `;
     document.head.append(style);
@@ -177,7 +182,7 @@
         function updatePlayback() {
             cancelAnimationFrame(frame);
             previous = 0;
-            if (!document.hidden && !reducedMotion.matches) {
+            if (!document.hidden && !reducedMotion.matches && document.documentElement.dataset.theme === "original" && !gl.isContextLost()) {
                 frame = requestAnimationFrame(animate);
             } else {
                 draw();
@@ -187,6 +192,7 @@
         const observer = new ResizeObserver(resize);
         observer.observe(canvas);
         document.addEventListener("visibilitychange", updatePlayback);
+        document.addEventListener("themechange", updatePlayback);
         reducedMotion.addEventListener("change", updatePlayback);
         canvas.addEventListener("webglcontextlost", () => {
             cancelAnimationFrame(frame);
