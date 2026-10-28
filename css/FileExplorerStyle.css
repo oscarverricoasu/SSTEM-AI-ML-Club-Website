@@ -1,0 +1,242 @@
+* {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+div.topbar-desktop{
+    position: fixed;
+    top:10px;
+    border: 1px solid rgb(255, 250, 250);
+    border-radius: 5px;
+    background-color: rgb(255, 250, 250);
+    height:30px;
+    width: 240px;
+    z-index: 11;
+}
+div.topbar-desktop p{
+    position: fixed;
+    top: 3px;
+    left: 15px;
+    font-size: 13px;;
+    background-color: white;
+    z-index:10;
+}
+
+div.mid-topbar{
+    position: fixed;
+    left: 0;
+    width: 100%;
+    top: 39px;
+    display: flex;
+    gap: 30px;
+    text-indent: 15px;
+    border: 1px solid rgb(255, 250, 250);
+    background-color: rgb(255, 250, 250);
+}
+
+div.mid-topbar > div.textbox{
+    position: relative;
+    background-color:white;
+    border: 1px solid rgb(0 0 0);
+    border-radius: 4px;
+    top: 8px;
+    height: 30px;
+    width: 1140px;
+}
+div.mid-topbar > div.textbox p{
+    position: relative;
+    top: -9px;
+    font-size: 14px;
+}
+div.mid-topbar > div.searchbox{
+    position: relative;
+    top: 8px;
+    left: -18px;
+    width: 475px;
+    height: 30px;
+    border: 1px solid rgb(0,0,0);
+    border-radius: 4px;
+    display: flex;
+}
+div.mid-topbar > div.searchbox p{
+    position: relative;
+    top: -9px;
+    font-size:14px;
+    white-space: nowrap;
+}
+
+/*NEEDS WORK !!!!!!!!!!!!!!!!!!!!*/
+div.mid-topbar > div.searchbox p#mag-glass{ 
+    margin-right: 0;
+    
+}
+
+div.topbar-background{
+    position: fixed;
+    border: 1px solid rgb(238, 236, 232);
+    left:0;
+    top:0;
+    height:87.5px;
+    width:100%;
+    background-color: rgb(238, 236, 232);
+}
+
+div.lower-topbar{
+    position: fixed;
+    top: 87.5px;
+    left: 0;
+    width:100%;
+    height: 46px;
+    border: 1px solid rgb(185, 184, 184);
+    display: flex;
+    gap: 50px;
+}
+div.lower-topbar p{
+    position: relative;
+    left: 20px;
+    top:-4px;
+}
+
+div.sidebar{
+    position: fixed;
+    left:0px;
+    top: 135px;
+    height: 170px;
+    width: 115px;
+    border-bottom: 1px solid rgb(185, 184, 184);
+    border-right: 1px solid rgb(185, 184, 184);
+    border-radius: 0;
+    padding: 0;
+    white-space: nowrap;
+    
+}
+div.sidebar li{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    width: 110px;
+    height: 30px;
+    left: -37px;
+    font-size: 13px;
+    text-decoration: none;
+    color: inherit;
+    cursor: default;
+    border-radius: 4px;
+}
+div.sidebar li button{
+  background: none;
+  width: 110px;
+  height: 30px;
+  border-radius: 4px;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer; /* Keeps it clear that it is still clickable */
+  outline: inherit;
+}
+div.sidebar li a{
+  display: flex;
+  width: 110px;
+  height: 30px;
+  border-radius: 4px;
+  border: none;
+  place-items: center; 
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer; /* Keeps it clear that it is still clickable */
+  outline: inherit;
+}
+div.sidebar li:hover{
+    background-color:rgb(202, 231, 255)
+}
+
+div.lower-sidebar{
+    position: fixed;
+    left:0px;
+    top: 300px;
+    width: 115px;
+    height: 640px;
+    font-size: 13px;
+    border-right: 1px solid rgb(185, 184, 184);
+}
+div.lower-sidebar ul li{
+    position:relative;
+    height:30px;
+}
+div.lower-sidebar ul li::marker{
+    content: ">     ";
+}
+
+div#home-page{
+    position:fixed;
+    top: 135px;
+    left: 115px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 40px;
+    display: none;
+}
+div#homepage header{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: black;
+    text-align: center;
+    white-space: nowrap;
+}
+div#projects-page{
+    position:fixed;
+    top: 135px;
+    left: 115px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    display: none;
+}
+div#projects-page header{
+    text-align: center;
+    font-size: 40px;
+}
+div#projects-page header1{
+    margin: 30px;
+}
+div#projects-page ul li::marker{
+    content: none;
+}
+div#members-page{
+    position:fixed;
+    top: 135px;
+    left: 115px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    display: none;
+}
+div#members-page header{
+    text-align: center;
+    font-size: 40px;
+}
+div#members-page ul li::marker{
+    content: none;
+}
+div#meetings-page{
+    position:fixed;
+    top: 135px;
+    left: 115px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    display: none;
+}
+div#meetings-page header{
+    text-align: center;
+    font-size: 40px;
+}
