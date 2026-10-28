@@ -318,3 +318,112 @@ html[data-theme="classic"] .classic-desktop { display: block; }
 }
 html[data-theme="classic"] .theme-toggle { font-family: "Courier New", monospace; }
 html[data-theme="classic"] .meeting-expanded h4 { color: #000080; }
+
+
+/*Testing for Garrett's theme.*/
+
+html[data-theme="matrix"] { --theme-accent: #0cf536; --theme-border: #00951e; color-scheme: dark; }
+html[data-theme="matrix"] body {
+    background: #111312;
+    color: var(--theme-text);
+    position: relative;
+    isolation: isolate;
+}
+html[data-theme="matrix"] body::before,
+html[data-theme="matrix"] .wave-background { display: none; }
+html[data-theme="matrix"] .splash,
+html[data-theme="matrix"] .meetings-page { background: transparent; isolation: isolate; }
+html[data-theme="matrix"] nav {
+    background: #151813;
+    border: 1px inset #29db2c;
+    max-width: none;
+    box-shadow: 0 12px 35px rgba(64, 80, 64, 0.711);
+}
+html[data-theme="matrix"] nav a { color: var(--theme-accent); text-shadow: 0 1px 8px #000; font: clamp(1rem, 1.4vw, 1.35rem) monospace }
+html[data-theme="matrix"] nav a:hover { color: #03a323; }
+html[data-theme="matrix"] .theme-toggle { color: var(--theme-accent); text-shadow: 0 1px 8px #000; }
+html[data-theme="matrix"] .theme-toggle:hover { color: #03a323; }
+html[data-theme="matrix"] .theme-options {
+    background: #151111;
+    border: 3px outset var(--theme-border);
+    border-radius: 0;
+    box-shadow: 4px 4px rgba(64, 80, 64, 0.711);
+}
+html[data-theme="matrix"] .theme-options button { color: var(--theme-accent); border-radius: 0; }
+html[data-theme="matrix"] .theme-options button:hover { background: #008020; color: white; }
+html[data-theme="matrix"] .hero-copy { text-shadow: 0 3px 24px #000; font: 36px/1.5 monospace; }
+html[data-theme="matrix"] .hero-subtitle { text-shadow: 0 3px 24px #000; color: var(--theme-accent); font: 24px/1.5 monospace; letter-spacing: .18em; font-weight: 700; }
+html[data-theme="matrix"] .hero-title::before {
+    content: "APP STATE / AI + ML CLUB";
+    display: block;
+    margin-bottom: 8px;
+    color: var(--theme-accent);
+    font: 24px/1.5 monospace;
+    letter-spacing: .18em;
+    font-weight: 700;
+    text-shadow: 0 3px 24px #064818;
+}
+html[data-theme="matrix"] .hero-title::before { position: absolute; bottom: 100%; width: 100%; }
+html[data-theme="matrix"] .projects { position: relative; z-index: 1; }
+html[data-theme="matrix"] .mountain-scene {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+    background: #111312 url("../images/matrix-code.gif") center bottom / cover no-repeat;
+}
+html[data-theme="matrix"] .project-card,
+html[data-theme="matrix"] div.officer:is(#president, #vicePresident, #academicAdvisor),
+html[data-theme="matrix"] #otherMembers,
+html[data-theme="matrix"] .upcoming-card,
+html[data-theme="matrix"] .previous-meeting {
+    background: #151111;
+    border: 2px solid var(--theme-border);
+    border-radius: 50px;
+    box-shadow: 0 12px 35px rgba(64, 80, 64, 0.711);
+    color: var(--theme-text);
+}
+html[data-theme="matrix"] .project-card:hover,
+html[data-theme="matrix"] div.officer:is(#president, #vicePresident, #academicAdvisor):hover,
+html[data-theme="matrix"] .previous-meeting:hover { border-color: var(--theme-accent); background: #20211f; }
+html[data-theme="matrix"] .project-section p{
+    font: 22px monospace;
+}
+html[data-theme="matrix"] .project-section:is(#project1, #project3, #project5, #project7) {
+    background: #151813;
+    color: var(--theme-text);
+    border-top: 2px solid var(--theme-border);
+}
+html[data-theme="matrix"] .project-section:is(#project2, #project4, #project6, #project8) {
+    background: #151111;
+    color: var(--theme-text);
+    border-top: 2px solid var(--theme-border);
+}
+html[data-theme="matrix"] .project-section h2 { color: var(--theme-accent); font: 48px monospace; }
+html[data-theme="matrix"] main > h1,
+html[data-theme="matrix"] .officerName,
+html[data-theme="matrix"] .position,
+html[data-theme="matrix"] #otherMembers h1 { text-shadow: none; font: 30px monospace;}
+html[data-theme="matrix"] :is(#president, #vicePresident, #academicAdvisor) .profile { border-color: var(--theme-border); box-shadow: none; }
+html[data-theme="matrix"] .officer p:last-child,
+html[data-theme="matrix"] .meeting-date,
+html[data-theme="matrix"] .previous-date { color: var(--theme-accent); text-shadow: none; font: 18px monospace; }
+html[data-theme="matrix"] #otherMembers li,
+html[data-theme="matrix"] .meeting-link,
+html[data-theme="matrix"] .meeting-links a { border-color: var(--theme-border); background: #1e2920; color: var(--theme-text); font: 14px monospace; }
+html[data-theme="matrix"] #otherMembers li:hover,
+html[data-theme="matrix"] .meeting-link:hover,
+html[data-theme="matrix"] .meeting-links a:hover { border-color: var(--theme-accent); box-shadow: none; background: #263b29; }
+@media (max-width: 1000px) {
+    html[data-theme="matrix"] .projects { grid-template-columns: repeat(2, minmax(0, 210px)); padding-inline: 20px; gap: 24px; }
+}
+@media (max-width: 600px) {
+    nav { padding: 24px 20px; gap: 16px; }
+    html[data-theme="matrix"] .project-section:is(#project1, #project2, #project3, #project4, #project5, #project6, #project7, #project8) { padding: 64px 24px; }
+    html[data-theme="matrix"] .hero-title::before { font-size: 10px; letter-spacing: .1em; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+}
