@@ -3,7 +3,7 @@
     "use strict";
     const key = "aiml-club-theme";
     function apply(value) {
-        const theme = ["appstate", "classic", "FileExplorer"].includes(value) ? value : "original";
+        const theme = ["appstate", "classic", "matrix", "FileExplorer"].includes(value) ? value : "original";
         document.documentElement.dataset.theme = theme;
         document.querySelectorAll("[data-theme-option]").forEach(option => {
             option.setAttribute("aria-pressed", String(option.dataset.themeOption === theme));
