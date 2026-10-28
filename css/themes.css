@@ -25,6 +25,13 @@
     font: inherit;
     cursor: pointer;
 }
+.theme-control a{
+    min-height: 40px;
+    padding: 8px 14px;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
 .theme-control .theme-toggle {
     min-height: 0;
     padding: 0;
@@ -57,10 +64,19 @@
     text-align: left;
     color: #f5f5f0;
 }
+.theme-options a {
+    display: block;
+    width: 100%;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    text-align: left;
+    color: #f5f5f0;
+}
 .theme-options button:hover { background: #ffffff12; }
+.theme-options a:hover { background: #ffffff12; }
 .theme-options button[aria-pressed="true"] { color: var(--theme-accent); background: #ffffff0a; }
 .theme-options button[aria-pressed="true"]::after { content: " ✓"; }
-nav a:focus-visible,
 .theme-control button:focus-visible {
     outline: 2px solid var(--theme-accent);
     outline-offset: 3px;
