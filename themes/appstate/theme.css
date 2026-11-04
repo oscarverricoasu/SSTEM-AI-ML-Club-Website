@@ -1,0 +1,87 @@
+html[data-theme="appstate"] {
+    --theme-accent: #ffcc00;
+    color-scheme: dark;
+}
+html[data-theme="appstate"] body {
+    background: #111312;
+    color: var(--theme-text);
+    position: relative;
+    isolation: isolate;
+}
+html[data-theme="appstate"] body::before { display: none; }
+html[data-theme="appstate"] .splash,
+html[data-theme="appstate"] .meetings-page { background: transparent; isolation: isolate; }
+html[data-theme="appstate"] .mountain-scene {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+    background: #111312 url("../../images/mountains.svg") center bottom / cover no-repeat;
+}
+html[data-theme="appstate"] .wave-background { display: none; }
+html[data-theme="appstate"] nav a { color: var(--theme-text); text-shadow: none; }
+html[data-theme="appstate"] nav a:hover { color: var(--theme-accent); }
+html[data-theme="appstate"] .theme-toggle { color: var(--theme-text); text-shadow: none; }
+html[data-theme="appstate"] .theme-toggle:hover { color: var(--theme-accent); }
+html[data-theme="appstate"] .hero-copy { text-shadow: 0 3px 24px #000; }
+html[data-theme="appstate"] .hero-subtitle { color: var(--theme-accent); }
+html[data-theme="appstate"] .hero-title::before {
+    content: "APP STATE / AI + ML CLUB";
+    display: block;
+    margin-bottom: 24px;
+    color: var(--theme-accent);
+    font: 12px/1.5 monospace;
+    letter-spacing: .18em;
+}
+/* The typing spans are positioned relative to their title. Keep the eyebrow separate. */
+html[data-theme="appstate"] .hero-title::before { position: absolute; bottom: 100%; width: 100%; }
+html[data-theme="appstate"] .projects { position: relative; z-index: 1; }
+html[data-theme="appstate"] .project-card,
+html[data-theme="appstate"] div.officer:is(#president, #vicePresident, #academicAdvisor),
+html[data-theme="appstate"] #otherMembers,
+html[data-theme="appstate"] .upcoming-card,
+html[data-theme="appstate"] .previous-meeting {
+    background: var(--theme-surface);
+    border: 1px solid var(--theme-border);
+    border-radius: 12px;
+    box-shadow: 0 12px 35px #0003;
+    color: var(--theme-text);
+}
+html[data-theme="appstate"] .project-card:hover,
+html[data-theme="appstate"] div.officer:is(#president, #vicePresident, #academicAdvisor):hover,
+html[data-theme="appstate"] .previous-meeting:hover { border-color: var(--theme-accent); background: #25291e; }
+html[data-theme="appstate"] .project-section:is(#project1, #project2, #project3, #project4, #project5, #project6, #project7, #project8) {
+    background: #151813;
+    color: var(--theme-text);
+    border-top: 1px solid var(--theme-border);
+}
+html[data-theme="appstate"] .project-section:is(#project1, #project3, #project5, #project7) { background: #1c2019; }
+html[data-theme="appstate"] .project-section h2 { color: var(--theme-accent); }
+html[data-theme="appstate"] main > h1,
+html[data-theme="appstate"] .officerName,
+html[data-theme="appstate"] .position,
+html[data-theme="appstate"] #otherMembers h1 { text-shadow: none; }
+html[data-theme="appstate"] :is(#president, #vicePresident, #academicAdvisor) .profile { border-color: var(--theme-accent); box-shadow: none; }
+html[data-theme="appstate"] .officer p:last-child,
+html[data-theme="appstate"] .meeting-date,
+html[data-theme="appstate"] .previous-date { color: var(--theme-accent); text-shadow: none; }
+html[data-theme="appstate"] #otherMembers li,
+html[data-theme="appstate"] .meeting-link,
+html[data-theme="appstate"] .meeting-links a { border-color: var(--theme-border); background: #25291e; color: var(--theme-text); }
+html[data-theme="appstate"] #otherMembers li:hover,
+html[data-theme="appstate"] .meeting-link:hover,
+html[data-theme="appstate"] .meeting-links a:hover { border-color: var(--theme-accent); box-shadow: none; background: #373b26; }
+@media (max-width: 1000px) {
+    html[data-theme="appstate"] .projects { grid-template-columns: repeat(2, minmax(0, 210px)); padding-inline: 20px; gap: 24px; }
+}
+@media (max-width: 600px) {
+    nav { padding: 24px 20px; gap: 16px; }
+    html[data-theme="appstate"] .project-section:is(#project1, #project2, #project3, #project4, #project5, #project6, #project7, #project8) { padding: 64px 24px; }
+    html[data-theme="appstate"] .hero-title::before { font-size: 10px; letter-spacing: .1em; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+}
+

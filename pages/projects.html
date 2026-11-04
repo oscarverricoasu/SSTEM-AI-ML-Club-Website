@@ -10,447 +10,7 @@
 
     <title>Projects</title>
 
-
-
-    <style>
-
-
-
-        * {
-
-            box-sizing: border-box;
-
-            margin: 0;
-
-            padding: 0;
-
-        }
-
-
-
-
-
-        html {
-
-            scroll-behavior: smooth;
-
-        }
-
-
-
-
-
-        body {
-
-            background-color: black;
-
-            font-family: Arial, sans-serif;
-
-        }
-
-
-
-
-
-        /* --------------------
-
-           SPLASH SCREEN
-
-        -------------------- */
-
-
-
-        .splash {
-
-            min-height: 100vh;
-
-            background-color: #77243e;
-
-
-
-            position: relative;
-
-            overflow: hidden;
-
-        }
-
-
-
-
-
-        /* Put navigation/cards above animated background */
-
-
-
-        .splash nav,
-
-        .splash .projects {
-
-            position: relative;
-
-            z-index: 2;
-
-        }
-
-
-
-
-
-
-
-        /* --------------------
-
-           NAVIGATION
-
-        -------------------- */
-
-
-
-        nav {
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            flex-wrap: wrap;
-
-            gap: 14px 24px;
-
-            max-width: 1280px;
-
-            margin-inline: auto;
-
-            padding: 28px 40px;
-
-        }
-
-
-
-
-
-        nav a {
-
-            color: #eef0ff;
-
-            text-shadow: 0 1px 8px rgba(12, 6, 55, 0.7);
-
-            text-decoration: none;
-
-
-
-            font-size: clamp(1rem, 1.4vw, 1.35rem);
-
-        }
-
-
-
-
-
-        nav a:hover {
-
-            color: white;
-
-        }
-
-
-
-
-
-        /* --------------------
-
-           NAVIGATION
-
-        -------------------- */
-
-        /* Put navigation/cards above animated background */
-
-
-
-        .splash nav,
-
-        .splash .projects {
-
-            position: relative;
-
-            z-index: 2;
-
-        }
-
-
-
-
-
-
-
-        /* --------------------
-
-           NAVIGATION
-
-        -------------------- */
-
-
-
-        nav {
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            flex-wrap: wrap;
-
-            gap: 14px 24px;
-
-            max-width: 1280px;
-
-            margin-inline: auto;
-
-            padding: 28px 40px;
-
-        }
-
-
-
-
-
-        nav a {
-
-            color: #eef0ff;
-
-            text-shadow: 0 1px 8px rgba(12, 6, 55, 0.7);
-
-            text-decoration: none;
-
-
-
-            font-size: clamp(1rem, 1.4vw, 1.35rem);
-
-        }
-
-
-
-
-
-        nav a:hover {
-
-            color: white;
-
-        }
-
-
-
-        /* --------------------
-
-           PROJECT GRID
-
-        -------------------- */
-
-
-
-    .projects {
-
-        display: grid;
-
-
-
-        grid-template-columns: repeat(4, 210px);
-
-
-
-        justify-content: center;
-
-
-
-        gap: 38px 40px;
-
-
-
-        padding-top: 60px;
-
-        padding-bottom: 70px;
-
-    }
-
-
-
-        .project-link {
-
-            text-decoration: none;
-
-        }
-
-
-
-
-
-                
-        .project-card {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 15px;
-            font-size: 18px;
-            font-weight: bold;
-            color: black;
-            cursor: pointer;
-        }
-
-
-
-
-
-        .project-card:hover {
-
-            background-color: #dddddd;
-
-        }
-
-
-
-
-
-
-
-        /* --------------------
-
-           PROJECT SECTIONS
-
-        -------------------- */
-
-
-
-        .project-section {
-
-            min-height: 100vh;
-
-
-
-            padding: 100px;
-
-
-
-            color: black;
-
-        }
-
-
-
-
-
-        .project-section h2 {
-
-            font-size: 48px;
-
-
-
-            margin-bottom: 30px;
-
-        }
-
-
-
-
-
-        .project-section p {
-
-            max-width: 800px;
-
-
-
-            font-size: 22px;
-
-
-
-            line-height: 1.6;
-
-        }
-
-
-
-
-
-
-
-        /* --------------------
-
-           SECTION COLORS
-
-        -------------------- */
-
-
-
-        #project1 {
-
-            background-color: #ff6b6b;
-
-        }
-
-
-
-        #project2 {
-
-            background-color: #ffa94d;
-
-        }
-
-
-
-        #project3 {
-
-            background-color: #ffd43b;
-
-        }
-
-
-
-        #project4 {
-
-            background-color: #69db7c;
-
-        }
-
-
-
-        #project5 {
-
-            background-color: #38d9a9;
-
-        }
-
-
-
-        #project6 {
-
-            background-color: #4dabf7;
-
-        }
-
-
-
-        #project7 {
-
-            background-color: #748ffc;
-
-        }
-
-
-
-        #project8 {
-
-            background-color: #da77f2;
-
-        }
-
-
-
-    </style>
-
-
-
+    <link rel="stylesheet" href="../css/projects-style.css">
     <link rel="stylesheet" href="../css/themes.css">
     <script src="../scripts/theme.js"></script>
 </head>
@@ -512,13 +72,7 @@
 
             <div class="theme-control">
         <button class="theme-toggle" type="button" aria-expanded="false" aria-controls="theme-options">Theme</button>
-        <div class="theme-options" id="theme-options" hidden>
-            <button type="button" data-theme-option="original" aria-pressed="false">Original</button>
-            <button type="button" data-theme-option="appstate" aria-pressed="false">App State</button>
-            <button type="button" data-theme-option="classic" aria-pressed="false">Classic</button>
-            <button type="button" data-theme-option="luke" aria-pressed="false">Luke</button>
-            <button type="button" data-theme-option="matrix" aria-pressed="false">Matrix</button>
-        </div>
+        <div class="theme-options" id="theme-options" hidden></div>
     </div>
 </nav>
 
@@ -571,59 +125,24 @@
             </a>
 
 
-
-
-
             <a href="#project6" class="project-link">
-
                 <div class="project-card"></div>
-
             </a>
-
-
-
 
 
             <a href="#project7" class="project-link">
-
                 <div class="project-card"></div>
-
             </a>
-
-
-
 
 
             <a href="#project8" class="project-link">
-
                 <div class="project-card"></div>
-
             </a>
-
-
-
-
 
         </main>
 
 
-
-
-
     </section>
-
-
-
-
-
-
-
-    <!-- ========================================
-
-         PROJECT 1
-
-    ========================================= -->
-
 
 
     <!-- PROJECT 1: RiverCam AI -->
@@ -709,39 +228,16 @@
 
 
 
-
-
-    <!-- ========================================
-
-         PROJECT 6
-
-    ========================================= -->
-
-
-
-    <section id="project6" class="project-section">
-
-
-
-        <h2>Project Six</h2>
-
-
-
-        <p>
-
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-            Sed do eiusmod tempor incididunt ut labore et dolore magna
-
-            aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-
-            ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
-        </p>
-
-
-
-    </section>
+<!--PROJECT 6-->
+<section id="project6" class="project-section">
+    <h2>Project Six</h2>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Sed do eiusmod tempor incididunt ut labore et dolore magna
+        aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+        ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+</section>
 
 
 
@@ -749,11 +245,7 @@
 
 
 
-    <!-- ========================================
-
-         PROJECT 7
-
-    ========================================= -->
+    <!-- PROJECT 7 -->
 
 
 

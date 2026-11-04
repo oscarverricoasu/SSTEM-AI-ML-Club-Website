@@ -24,7 +24,7 @@
         ]
     };
 
-    const palette = themePalettes[theme] ?? palettes[variant];
+    const defaultPalette = ["0.16, 0.075, 0.46", "0.24, 0.29, 0.94", "0.51, 0.27, 0.98", "1.0, 0.38, 0.49", "0.64, 0.69, 1.0", "0.26, 0.55, 0.97"];
     // Adjust these to change the background.
     const water = {
         speed: 1.0,       // Larger = faster flow down and to the right.
@@ -55,6 +55,7 @@
         uniform float u_ripples;
         uniform float u_turbulence;
         uniform float u_brightness;
+        uniform vec3 u_palette[6];
 
         void main() {
             // Coordinates start at the top left. Subtracting time makes the
@@ -82,17 +83,17 @@
             float crest = pow(swell, 6.0 + 10.0 * (0.5 + 0.5 * sin(p.x * 4.0 + p.y * 7.0 - t * 0.57)));
             float glint = pow(swell, 55.0);
 
-            vec3 deep = vec3(${palette?.[0] ?? "0.16, 0.075, 0.46"});
-            vec3 blue = vec3(${palette?.[1] ?? "0.24, 0.29, 0.94"});
+            vec3 deep = u_palette[0];
+            vec3 blue = u_palette[1];
             vec3 color = mix(deep, blue, 0.5 + 0.5 * sin(phase - 0.95));
             float light = 0.75 + 0.25 * sin(p.x * 2.4 - p.y * 3.0 + 0.7 + t * 0.31);
-            color = mix(color, vec3(${palette?.[2] ?? "0.51, 0.27, 0.98"}), shoulder * 0.55);
+            color = mix(color, u_palette[2], shoulder * 0.55);
 
             float cool = smoothstep(0.05, 0.95, uv.x + 0.10 * sin(p.y * 4.0 + t * 0.23));
-            vec3 reflected = mix(vec3(${palette?.[3] ?? "1.0, 0.38, 0.49"}), vec3(${palettes[variant]?.[4] ?? "0.64, 0.69, 1.0"}), cool);
+            vec3 reflected = mix(u_palette[3], u_palette[4], cool);
             color = mix(color, reflected, crest * light * 0.78);
             color += reflected * shoulder * 0.12 + glint * 0.035;
-            color = mix(color, vec3(${palette?.[5] ?? "0.26, 0.55, 0.97"}),
+            color = mix(color, u_palette[5],
                         0.30 * (1.0 - uv.y) * uv.x);
 
             // Gentle falloff keeps the lettering legible without a visible box.
@@ -199,6 +200,11 @@
         }
 
         function updatePlayback() {
+            theme = document.documentElement.dataset.theme;
+            const palette = themePalettes[theme] ?? palettes[variant] ?? defaultPalette;
+            gl.useProgram(program);
+            gl.uniform3fv(gl.getUniformLocation(program, "u_palette[0]"),
+                new Float32Array(palette.flatMap(color => color.split(",").map(Number))));
             cancelAnimationFrame(frame);
             previous = 0;
             if (!document.hidden && !reducedMotion.matches && (document.documentElement.dataset.theme === "original" || document.documentElement.dataset.theme === "luke") && !gl.isContextLost()) {

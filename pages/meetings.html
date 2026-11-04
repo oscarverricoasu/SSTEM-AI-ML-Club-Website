@@ -28,20 +28,13 @@
 
     <div class="theme-control">
         <button class="theme-toggle" type="button" aria-expanded="false" aria-controls="theme-options">Theme</button>
-        <div class="theme-options" id="theme-options" hidden>
-            <button type="button" data-theme-option="original" aria-pressed="false">Original</button>
-            <button type="button" data-theme-option="appstate" aria-pressed="false">App State</button>
-            <button type="button" data-theme-option="classic" aria-pressed="false">Classic</button>
-            <button type="button" data-theme-option="matrix" aria-pressed="false">Matrix</button>
-        </div>
+        <div class="theme-options" id="theme-options" hidden></div>
     </div>
 </nav>
 
 <script src="../scripts/details.js" defer></script>
 <script src="../scripts/waves.js" defer></script>
-<!-- ====================
-     MAIN CONTENT
-===================== -->
+<!-- MAIN CONTENT -->
 
 <main>
 
@@ -56,7 +49,7 @@
         <article class="upcoming-card">
 
             <p class="meeting-date">
-                Next Meeting: To Be Announced
+                Next Meeting: Tuesday, November 10th
             </p>
 
             <h2 class="meeting-title">
@@ -88,6 +81,50 @@
         <h2 class="section-title">Previous Meetings</h2>
 
         <div class="previous-list">
+
+            <!-- NOVEMBER 3 -->
+            <article class="previous-meeting">
+
+                <div class="previous-date">
+                    October 27, 2026
+                </div>
+
+                <div class="previous-info">
+                    <h3>Convolutional Neural Networks: Basics Workshop</h3>
+                    <p>
+                        Introduction to CNNs and their applications
+                        in computer vision.
+                    </p>
+                </div>
+
+                <button class="meeting-link details-button"
+                        type="button" aria-expanded="false">
+                    Details
+                </button>
+
+                <div class="meeting-expanded">
+                    <p>
+                        Building on our previous convolutions workshop,
+                        we introduced Convolutional Neural Networks
+                        (CNNs), exploring how convolutional layers,
+                        filters, and feature extraction allow neural
+                        networks to recognize patterns in images.
+                        We connected these concepts to practical
+                        applications in computer vision.
+                    </p>
+
+                    <h4>Meeting Resources</h4>
+
+                    <div class="meeting-links">
+                        <a href="https://docs.google.com/presentation/d/15Vi79wTAT9kVWRRMTHu3Mc4zgx3f2ZcJVTrfREAikvc/edit?usp=drive_link" target="_blank"
+                           rel="noopener noreferrer">
+                            Presentation Slides
+                        </a>
+                    </div>
+                </div>
+
+            </article>
+
 
 
             <!-- OCTOBER 27 -->

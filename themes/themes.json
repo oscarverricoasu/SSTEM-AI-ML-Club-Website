@@ -1,0 +1,45 @@
+{
+  "defaultTheme": "original",
+  "themes": [
+    {
+      "id": "original",
+      "name": "Original",
+      "layout": "standard",
+      "stylesheet": "themes/original/theme.css"
+    },
+    {
+      "id": "appstate",
+      "name": "App State",
+      "layout": "standard",
+      "stylesheet": "themes/appstate/theme.css",
+      "module": "themes/background.js"
+    },
+    {
+      "id": "classic",
+      "name": "Classic",
+      "layout": "standard",
+      "stylesheet": "themes/classic/theme.css",
+      "module": "themes/classic/theme.js"
+    },
+    {
+      "id": "luke",
+      "name": "Luke",
+      "layout": "standard",
+      "stylesheet": "themes/luke/theme.css"
+    },
+    {
+      "id": "matrix",
+      "name": "Matrix",
+      "layout": "standard",
+      "stylesheet": "themes/matrix/theme.css",
+      "module": "themes/background.js"
+    },
+    {
+      "id": "file-explorer",
+      "name": "File Explorer",
+      "layout": "explorer",
+      "stylesheet": "themes/file-explorer/theme.css",
+      "entry": "pages/FileExplorerTheme.html"
+    }
+  ]
+}

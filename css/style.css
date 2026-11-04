@@ -17,9 +17,7 @@ body {
 }
 
 
-/* --------------------
-    SPLASH SCREEN
--------------------- */
+/* SPLASH SCREEN */
 
 .splash {
     min-height: 100vh;
@@ -40,9 +38,7 @@ body {
 
 
 
-/* --------------------
-    NAVIGATION
--------------------- */
+/* NAVIGATION */
 
 nav {
     display: flex;
@@ -71,9 +67,7 @@ nav a:hover {
 
 
 
-/* --------------------
-    TYPED HOMEPAGE MESSAGE
--------------------- */
+/* TYPED HOMEPAGE MESSAGE */
 
 .hero-copy {
     position: absolute;

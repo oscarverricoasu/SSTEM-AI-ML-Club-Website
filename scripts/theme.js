@@ -1,95 +1,148 @@
-/* Apply the saved preference before paint; storage may be unavailable in private browsing. */
 (() => {
     "use strict";
+    const base = new URL("../", document.currentScript.src);
     const key = "aiml-club-theme";
-    function apply(value) {
-        const theme = ["appstate", "classic", "luke", "matrix", "FileExplorer"].includes(value) ? value : "original";
-        document.documentElement.dataset.theme = theme;
-        document.querySelectorAll("[data-theme-option]").forEach(option => {
-            option.setAttribute("aria-pressed", String(option.dataset.themeOption === theme));
-        });
-        document.dispatchEvent(new Event("themechange"));
+    const layout = document.documentElement.dataset.layout || "standard";
+    const ready = document.readyState === "loading"
+        ? new Promise(resolve => document.addEventListener("DOMContentLoaded", resolve, { once: true }))
+        : Promise.resolve();
+    let activeModule;
+    let activeLink;
+    let request = 0;
+    let closeMenu = () => {};
+    function savedTheme() {
+        try { return localStorage.getItem(key); } catch { return null; }
     }
-    let saved = "original";
-    try { saved = localStorage.getItem(key); } catch {}
-    apply(saved);
-    document.addEventListener("DOMContentLoaded", () => {
-        const control = document.querySelector(".theme-control");
-        const toggle = control?.querySelector(".theme-toggle");
-        const options = control?.querySelector(".theme-options");
-        if (toggle && options) {
-            const close = (restoreFocus = false) => {
+    function save(id) {
+        try { localStorage.setItem(key, id); } catch { /* The picker still works without storage. */ }
+    }
+    // Give existing page animations the saved preference while the registry loads.
+    document.documentElement.dataset.theme = savedTheme() || "original";
+
+    async function start() {
+        const response = await fetch(new URL("themes/themes.json", base)); // reads theme from json file
+        if (!response.ok) throw new Error(`Theme registry: HTTP ${response.status}`);
+        const registry = await response.json();
+        const themes = new Map();
+        for (const theme of registry.themes) {
+            if (!/^[a-z][a-z0-9-]*$/.test(theme.id) || themes.has(theme.id)
+                || typeof theme.name !== "string" || typeof theme.stylesheet !== "string"
+                || !["standard", "explorer"].includes(theme.layout)
+                || (theme.layout !== "standard" && typeof theme.entry !== "string")) {
+                throw new Error("Invalid theme registry entry");
+            }
+            themes.set(theme.id, theme);
+        }
+        const fallback = themes.get(registry.defaultTheme);
+        if (!fallback || fallback.layout !== "standard") throw new Error("Invalid default theme");
+        await ready;
+        const status = document.createElement("span");
+        status.className = "theme-status";
+        status.setAttribute("role", "status");
+        document.body.append(status);
+
+        async function apply(id, persist = false) {
+            const currentRequest = ++request;
+            const theme = themes.get(id) || fallback;
+            const entry = new URL(theme.entry || "index.html", base);
+            if (theme.layout !== layout) {
+                // Explorer is a separate page; retain the last standard skin.
+                if (persist && theme.layout === "standard") save(theme.id);
+                location.assign(entry.href);
+                return;
+            }
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.media = "not all";
+            link.href = new URL(theme.stylesheet, base).href;
+            try {
+                const loaded = new Promise((resolve, reject) => {
+                    link.onload = resolve;
+                    link.onerror = () => reject(new Error(`Could not load ${theme.name}`));
+                });
+                document.head.append(link);
+                const [, module] = await Promise.all([
+                    loaded,
+                    theme.module ? import(new URL(theme.module, base).href) : undefined
+                ]);
+                if (currentRequest !== request) { link.remove(); return; }
+                activeModule?.unmount();
+                activeModule = undefined;
+                document.documentElement.dataset.theme = theme.id;
+                link.media = "all";
+                activeLink?.remove();
+                activeLink = link;
+                activeModule = module;
+                module?.mount();
+                if (persist && theme.layout === "standard") save(theme.id);
+                document.querySelectorAll("[data-theme-option]").forEach(option => {
+                    option.setAttribute("aria-pressed", String(option.dataset.themeOption === theme.id));
+                });
+                status.textContent = "";
+                document.dispatchEvent(new CustomEvent("themechange", { detail: { theme: theme.id } }));
+            } catch (error) {
+                link.remove();
+                if (currentRequest === request) status.textContent = "Theme could not load. Please try again.";
+                console.warn(error);
+            }
+        }
+
+        document.querySelectorAll(".theme-control").forEach(control => {
+            const toggle = control.querySelector(".theme-toggle");
+            const options = control.querySelector(".theme-options");
+            if (!toggle || !options) return;
+            const close = (focus = false) => {
                 options.hidden = true;
                 toggle.setAttribute("aria-expanded", "false");
-                if (restoreFocus) toggle.focus();
+                if (focus) toggle.focus();
             };
-            apply(document.documentElement.dataset.theme);
+            closeMenu = close;
+            for (const theme of themes.values()) {
+                const button = document.createElement("button");
+                button.type = "button";
+                button.dataset.themeOption = theme.id;
+                button.textContent = theme.name;
+                button.setAttribute("aria-pressed", "false");
+                button.addEventListener("click", () => { void apply(theme.id, true); close(true); });
+                options.append(button);
+            }
             toggle.addEventListener("click", () => {
                 options.hidden = !options.hidden;
                 toggle.setAttribute("aria-expanded", String(!options.hidden));
             });
-            options.querySelectorAll("[data-theme-option]").forEach(option => {
-                option.addEventListener("click", () => {
-                    apply(option.dataset.themeOption);
-                    try { localStorage.setItem(key, option.dataset.themeOption); } catch {}
-                    close(true);
-                });
-            });
-            document.addEventListener("click", event => {
-                if (!control.contains(event.target)) close();
-            });
+            document.addEventListener("click", event => { if (!control.contains(event.target)) close(); });
             control.addEventListener("keydown", event => {
-                if (event.key === "Escape" && !options.hidden) {
-                    event.preventDefault();
-                    close(true);
-                }
+                if (event.key === "Escape" && !options.hidden) { event.preventDefault(); close(true); }
             });
             control.addEventListener("focusout", event => {
                 if (!control.contains(event.relatedTarget)) close();
             });
-        }
-        // Keep the fixed backdrop behind every section, outside splash stacking contexts.
-        const host = document.body;
-        const scene = document.createElement("div");
-        scene.className = "mountain-scene";
-        scene.setAttribute("aria-hidden", "true");
-        host.prepend(scene);
-
-        // Decorative windows live inside the page; no real browser popups.
-        const desktop = document.createElement("div");
-        desktop.className = "classic-desktop";
-        desktop.innerHTML = `
-            <div class="classic-popups">
-                <aside class="classic-window" aria-labelledby="classic-welcome-title">
-                    <div class="classic-titlebar"><span id="classic-welcome-title">welcome.exe</span><button type="button" data-close-popup aria-label="Close welcome window">×</button></div>
-                    <div class="classic-window-body"><strong>You've got potential!</strong><p>Welcome to the AI/ML Club.<br>Human curiosity. Unlimited bandwidth.</p><button type="button" data-close-popup>Cool, I'm in!</button></div>
-                </aside>
-                <aside class="classic-window" aria-labelledby="classic-status-title">
-                    <div class="classic-titlebar"><span id="classic-status-title">neural_network.txt</span><button type="button" data-close-popup aria-label="Close neural network window">×</button></div>
-                    <div class="classic-window-body"><strong>Brain connection established.</strong><p>Loading next big idea…</p><div class="classic-progress" aria-hidden="true"><span></span></div><p class="classic-small">100% curious. 0% dial-up required.</p><button type="button" data-close-popup>OK</button></div>
-                </aside>
-            </div>
-            <div class="classic-taskbar"><span>AI/ML ONLINE</span><button type="button" class="classic-reopen">Show popups</button><span class="classic-small">Best viewed with curiosity</span></div>`;
-        document.body.append(desktop);
-        const reopen = desktop.querySelector(".classic-reopen");
-        desktop.querySelectorAll("[data-close-popup]").forEach(button => {
-            button.addEventListener("click", () => {
-                button.closest(".classic-window").hidden = true;
-                reopen.focus();
-            });
         });
-        reopen.addEventListener("click", () => {
-            desktop.querySelectorAll(".classic-window").forEach(popup => { popup.hidden = false; });
-            desktop.querySelector("[data-close-popup]").focus();
+        const previousTheme = () => {
+            const saved = themes.get(savedTheme());
+            return saved?.layout === "standard" ? saved.id : fallback.id;
+        };
+        document.querySelectorAll("[data-return-theme]").forEach(button => {
+            button.addEventListener("click", () => { void apply(previousTheme(), true); });
         });
-        desktop.addEventListener("keydown", event => {
-            if (event.key === "Escape" && event.target.closest(".classic-window")) {
-                event.target.closest(".classic-window").hidden = true;
-                reopen.focus();
+        // Direct visits to Explorer keep the saved standard theme intact.
+        const initial = layout === "standard" ? previousTheme()
+            : [...themes.values()].find(theme => theme.layout === layout)?.id;
+        await apply(initial);
+        window.addEventListener("storage", event => {
+            if (layout === "standard" && (event.key === key || event.key === null)) {
+                closeMenu(); void apply(previousTheme());
             }
         });
-    });
-    window.addEventListener("storage", event => {
-        if (event.key === key || event.key === null) apply(event.newValue);
+    }
+    start().catch(async error => {
+        console.warn("Themes unavailable:", error);
+        await ready;
+        document.documentElement.dataset.theme = layout === "standard" ? "original" : "file-explorer";
+        document.dispatchEvent(new Event("themechange"));
+        document.querySelectorAll(".theme-toggle").forEach(button => {
+            button.disabled = true;
+            button.textContent = "Themes unavailable";
+        });
     });
 })();

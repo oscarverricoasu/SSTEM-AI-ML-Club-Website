@@ -1,0 +1,20 @@
+/* Original uses the page stylesheets and default wave palette. */
+
+html[data-theme="original"] .projects .project-card {
+    min-height: 180px;
+    height: 100%;
+    background-color: rgb(245 245 245 / 65%);
+    border: 2px solid rgb(255 255 255 / 70%);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px #0003;
+}
+
+html[data-theme="original"] .projects .project-link:hover .project-card {
+    background-color: rgb(245 245 245 / 80%);
+}
+
+html[data-theme="original"] .projects .project-link:focus-visible {
+    outline: 3px solid var(--theme-accent);
+    outline-offset: 5px;
+    border-radius: 12px;
+}
