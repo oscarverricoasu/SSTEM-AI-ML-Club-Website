@@ -277,6 +277,24 @@ div#meetings-page header {
     font-size: clamp(1rem, 4vw + 1rem, 2rem);
 }
 
-div#meetings-page header1 {
-    margin: 2rem;
+div#meetings-page h1,
+div#meetings-page span,
+div#meetings-page h2,
+div#meetings-page p,
+div#meetings-page h3,
+div#meetings-page a {
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+div#meetings-page h3 {
+    font-weight: normal;
+}
+
+div#meetings-page *#endOfText {
+    margin-bottom: 4rem;
+}
+div#meetings-page a#endOfText{
+    display: inline-block;
+    margin-bottom: 4rem;
 }
