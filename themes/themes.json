@@ -1,18 +1,18 @@
 {
-  "defaultTheme": "original",
+  "defaultTheme": "appstate",
   "themes": [
-    {
-      "id": "original",
-      "name": "Original",
-      "layout": "standard",
-      "stylesheet": "themes/original/theme.css"
-    },
     {
       "id": "appstate",
       "name": "App State",
       "layout": "standard",
       "stylesheet": "themes/appstate/theme.css",
       "module": "themes/background.js"
+    },
+    {
+      "id": "original",
+      "name": "Waves",
+      "layout": "standard",
+      "stylesheet": "themes/original/theme.css"
     },
     {
       "id": "classic",
