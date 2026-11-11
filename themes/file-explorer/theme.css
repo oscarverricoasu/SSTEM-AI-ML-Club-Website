@@ -1,242 +1,297 @@
 * {
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-div.topbar-desktop{
-    position: fixed;
-    top:10px;
-    border: 1px solid rgb(255, 250, 250);
-    border-radius: 5px;
-    background-color: rgb(255, 250, 250);
-    height:30px;
-    width: 240px;
-    z-index: 11;
-}
-div.topbar-desktop p{
-    position: fixed;
-    top: 3px;
-    left: 15px;
-    font-size: 13px;;
-    background-color: white;
-    z-index:10;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-div.mid-topbar{
+div.topbar-desktop {
+    position: fixed;
+    top: 0.6em;
+    border: 0.0625rem solid rgb(255, 250, 250);
+    border-radius: 0.3125rem;
+    background-color: rgb(255, 250, 250);
+    height: 1.875rem;
+    width: 15rem;
+    z-index: 11;
+}
+
+div.topbar-desktop p {
+    position: fixed;
+    top: 0.1875rem;
+    left: 0.9375rem;
+    font-size: 0.8125rem;
+    background-color: white;
+    z-index: 10;
+}
+
+div.mid-topbar {
     position: fixed;
     left: 0;
     width: 100%;
-    top: 39px;
+    top: 2.4375rem;
     display: flex;
-    gap: 30px;
-    text-indent: 15px;
-    border: 1px solid rgb(255, 250, 250);
+    gap: 1.875rem;
+    text-indent: 0.9375rem;
+    border: 0.0625rem solid rgb(255, 250, 250);
     background-color: rgb(255, 250, 250);
 }
 
-div.mid-topbar > div.textbox{
+div.mid-topbar>div.textbox {
     position: relative;
-    background-color:white;
-    border: 1px solid rgb(0 0 0);
-    border-radius: 4px;
-    top: 8px;
-    height: 30px;
-    width: 1140px;
+    background-color: white;
+    border: 0.0625rem solid rgb(0 0 0);
+    border-radius: 0.25rem;
+    top: 0.5rem;
+    height: 1.875rem;
+    width: 71.25rem;
 }
-div.mid-topbar > div.textbox p{
+
+div.mid-topbar>div.textbox p {
     position: relative;
-    top: -9px;
-    font-size: 14px;
+    top: -0.5625rem;
+    font-size: 0.875rem;
 }
-div.mid-topbar > div.searchbox{
+
+div.mid-topbar>div.searchbox {
     position: relative;
-    top: 8px;
-    left: -18px;
-    width: 475px;
-    height: 30px;
-    border: 1px solid rgb(0,0,0);
-    border-radius: 4px;
+    top: 0.5rem;
+    left: -1.125rem;
+    width: 29.6875rem;
+    height: 1.875rem;
+    border: 0.0625rem solid rgb(0, 0, 0);
+    border-radius: 0.25rem;
     display: flex;
 }
-div.mid-topbar > div.searchbox p{
+
+div.mid-topbar>div.searchbox p {
     position: relative;
-    top: -9px;
-    font-size:14px;
+    top: -0.5625rem;
+    font-size: 0.875rem;
     white-space: nowrap;
 }
 
 /*NEEDS WORK !!!!!!!!!!!!!!!!!!!!*/
-div.mid-topbar > div.searchbox p#mag-glass{ 
+div.mid-topbar>div.searchbox p#mag-glass {
     margin-right: 0;
-    
+
 }
 
-div.topbar-background{
+div.topbar-background {
     position: fixed;
-    border: 1px solid rgb(238, 236, 232);
-    left:0;
-    top:0;
-    height:87.5px;
-    width:100%;
+    border: 0.0625rem solid rgb(238, 236, 232);
+    left: 0;
+    top: 0;
+    height: 5.46875rem;
+    width: 100%;
     background-color: rgb(238, 236, 232);
 }
 
-div.lower-topbar{
+div.lower-topbar {
     position: fixed;
-    top: 87.5px;
+    top: 5.46875rem;
     left: 0;
-    width:100%;
-    height: 46px;
-    border: 1px solid rgb(185, 184, 184);
+    width: 100%;
+    height: 2.875rem;
+    border: 0.0625rem solid rgb(185, 184, 184);
     display: flex;
-    gap: 50px;
-}
-div.lower-topbar p{
-    position: relative;
-    left: 20px;
-    top:-4px;
+    gap: 3.125rem;
 }
 
-div.sidebar{
+div.lower-topbar p {
+    position: relative;
+    left: 1.25rem;
+    top: -0.25rem;
+}
+
+div.sidebar {
     position: fixed;
-    left:0px;
-    top: 135px;
-    height: 170px;
-    width: 115px;
-    border-bottom: 1px solid rgb(185, 184, 184);
-    border-right: 1px solid rgb(185, 184, 184);
+    left: 0%;
+    top: 8.4375rem;
+    height: 10.625rem;
+    width: 7.1875rem;
+    border-bottom: 0.0625rem solid rgb(185, 184, 184);
+    border-right: 0.0625rem solid rgb(185, 184, 184);
     border-radius: 0;
     padding: 0;
     white-space: nowrap;
-    
+
 }
-div.sidebar li{
+
+div.sidebar li {
     display: flex;
     position: relative;
     justify-content: center;
     align-items: center;
     list-style-type: none;
-    width: 110px;
-    height: 30px;
-    left: -37px;
-    font-size: 13px;
+    width: 6.875rem;
+    height: 1.875rem;
+    left: -2.3125rem;
+    font-size: 0.8125rem;
     text-decoration: none;
     color: inherit;
     cursor: default;
-    border-radius: 4px;
-}
-div.sidebar li button{
-  background: none;
-  width: 110px;
-  height: 30px;
-  border-radius: 4px;
-  border: none;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  cursor: pointer; /* Keeps it clear that it is still clickable */
-  outline: inherit;
-}
-div.sidebar li a{
-  display: flex;
-  width: 110px;
-  height: 30px;
-  border-radius: 4px;
-  border: none;
-  place-items: center; 
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  font: inherit;
-  color: inherit;
-  cursor: pointer; /* Keeps it clear that it is still clickable */
-  outline: inherit;
-}
-div.sidebar li:hover{
-    background-color:rgb(202, 231, 255)
+    border-radius: 0.25rem;
 }
 
-div.lower-sidebar{
+div.sidebar li button {
+    background: none;
+    width: 6.875rem;
+    height: 1.875rem;
+    border-radius: 0.25rem;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    /* Keeps it clear that it is still clickable */
+    outline: inherit;
+}
+
+div.sidebar li a {
+    display: flex;
+    width: 6.875rem;
+    height: 1.875rem;
+    border-radius: 0.25rem;
+    border: none;
+    place-items: center;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    /* Keeps it clear that it is still clickable */
+    outline: inherit;
+}
+
+div.sidebar li:hover {
+    background-color: rgb(202, 231, 255)
+}
+
+div.lower-sidebar {
     position: fixed;
-    left:0px;
-    top: 300px;
-    width: 115px;
-    height: 640px;
-    font-size: 13px;
-    border-right: 1px solid rgb(185, 184, 184);
+    left: 0%;
+    top: 18.75rem;
+    width: 7.1875rem;
+    height: 40rem;
+    font-size: 0.8125rem;
+    border-right: 0.0625rem solid rgb(185, 184, 184);
 }
-div.lower-sidebar ul li{
-    position:relative;
-    height:30px;
+
+div.lower-sidebar ul li {
+    position: relative;
+    height: 1.875rem;
 }
-div.lower-sidebar ul li::marker{
+
+div.lower-sidebar ul li::marker {
     content: ">     ";
 }
 
-div#home-page{
-    position:fixed;
-    top: 135px;
-    left: 115px;
+div#home-page {
+    position: fixed;
+    top: 8.4rem;
+    left: 7.2rem;
     width: 100%;
     height: 100%;
     text-align: center;
-    font-size: 40px;
+    justify-content: center;
     display: none;
 }
-div#homepage header{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    color: black;
-    text-align: center;
-    white-space: nowrap;
+
+div#home-page header {
+    position: relative;
+    top: 8rem;
+    left: 0rem;
+    font-size: clamp(2rem, 4vw + 1rem, 4rem);
+}
+
+div#home-page p {
+    position: relative;
+    top: 9rem;
+    left: 0rem;
+    font-size: clamp(0.4rem, 4vw + 1rem, 2rem);
 }
 div#projects-page{
-    position:fixed;
-    top: 135px;
-    left: 115px;
-    width: 100%;
-    height: 100%;
+    position: fixed;
+    top: 8.4rem;
+    left: 7.2rem;
+    width: calc(100% - 7.2rem);
+    height: calc(100vh - 8.4rem);
     overflow-y: auto;
+    overflow-x: hidden;
     display: none;
 }
-div#projects-page header{
+
+div#projects-page header {
     text-align: center;
-    font-size: 40px;
+    font-size: clamp(1rem, 4vw + 1rem, 2rem);
 }
-div#projects-page header1{
-    margin: 30px;
+
+div#projects-page header1 {
+    margin: 2rem;
 }
-div#projects-page ul li::marker{
+
+div#projects-page ul li::marker {
     content: none;
 }
-div#members-page{
-    position:fixed;
-    top: 135px;
-    left: 115px;
-    width: 100%;
-    height: 100%;
+div#members-page {
+    position: fixed;
+    top: 8.4rem;
+    left: 7.2rem;
+    width: calc(100% - 7.2rem);
+    height: calc(100vh - 8.4rem);
     overflow-y: auto;
+    overflow-x: hidden;
     display: none;
 }
-div#members-page header{
+
+div#members-page header {
     text-align: center;
-    font-size: 40px;
+    font-size: clamp(1rem, 4vw + 1rem, 2rem);
 }
-div#members-page ul li::marker{
+
+div#members-page ul li::marker {
     content: none;
+}
+
+div#members-page img {
+    height: 8rem;
+    width: 8rem;
+    border-radius: 1rem;
 }
 div#meetings-page{
-    position:fixed;
-    top: 135px;
-    left: 115px;
-    width: 100%;
-    height: 100%;
+    position: fixed;
+    top: 8.4rem;
+    left: 7.2rem;
+    width: calc(100% - 7.2rem);
+    height: calc(100vh - 8.4rem);
     overflow-y: auto;
+    overflow-x: hidden;
     display: none;
 }
-div#meetings-page header{
+
+div#meetings-page header {
     text-align: center;
-    font-size: 40px;
+    font-size: clamp(1rem, 4vw + 1rem, 2rem);
+}
+
+div#meetings-page h1,
+div#meetings-page span,
+div#meetings-page h2,
+div#meetings-page p,
+div#meetings-page h3,
+div#meetings-page a {
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+div#meetings-page h3 {
+    font-weight: normal;
+}
+
+div#meetings-page *#endOfText {
+    margin-bottom: 4rem;
+}
+div#meetings-page a#endOfText{
+    display: inline-block;
+    margin-bottom: 4rem;
 }
