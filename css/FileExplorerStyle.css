@@ -210,8 +210,12 @@ div#home-page p {
     left: 0rem;
     font-size: clamp(0.4rem, 4vw + 1rem, 2rem);
 }
+<<<<<<< Updated upstream
 
 div#projects-page {
+=======
+div#projects-page{
+>>>>>>> Stashed changes
     position: fixed;
     top: 8.4rem;
     left: 7.2rem;
@@ -234,7 +238,10 @@ div#projects-page header1 {
 div#projects-page ul li::marker {
     content: none;
 }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 div#members-page {
     position: fixed;
     top: 8.4rem;
@@ -260,8 +267,12 @@ div#members-page img {
     width: 8rem;
     border-radius: 1rem;
 }
+<<<<<<< Updated upstream
 
 div#meetings-page {
+=======
+div#meetings-page{
+>>>>>>> Stashed changes
     position: fixed;
     top: 8.4rem;
     left: 7.2rem;
