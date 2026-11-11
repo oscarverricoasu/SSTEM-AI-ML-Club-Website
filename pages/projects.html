@@ -13,6 +13,104 @@
     <link rel="stylesheet" href="../css/projects-style.css">
     <link rel="stylesheet" href="../css/themes.css">
     <script src="../scripts/theme.js"></script>
+
+    <!-- Carousel overrides are scoped so the rest of the site keeps its styling. -->
+    <style>
+        .projects.project-carousel {
+            display: block;
+            width: min(100%, 1200px);
+            max-width: 100%;
+            min-width: 0;
+            box-sizing: border-box;
+            margin-inline: auto;
+            padding: 24px 16px;
+        }
+        .project-carousel .carousel-viewport {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            padding-block: 28px;
+            touch-action: pan-y pinch-zoom;
+            cursor: grab;
+        }
+        .project-carousel .carousel-viewport.is-dragging { cursor: grabbing; }
+        .project-carousel .carousel-track {
+            display: flex;
+            gap: 24px;
+            width: 100%;
+            will-change: transform;
+        }
+        .project-carousel .carousel-track > .project-link {
+            display: block;
+            flex: 0 0 calc((100% - 48px) / 3);
+            min-width: 0;
+            width: auto;
+            margin: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-user-drag: none;
+            transform-origin: center center;
+            transition: none;
+            position: relative;
+        }
+        .project-carousel .project-card {
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            min-height: 240px;
+            overflow-wrap: anywhere;
+        }
+        .project-carousel .project-link:focus-visible {
+            outline: 3px solid currentColor;
+            outline-offset: -3px;
+            border-radius: 8px;
+        }
+        .project-carousel .carousel-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin-top: 12px;
+        }
+        .project-carousel .carousel-button {
+            display: inline-grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            border: 1px solid currentColor;
+            border-radius: 50%;
+            background: transparent;
+            color: inherit;
+            font: inherit;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .project-carousel .carousel-hint { margin: 0; font-size: .9rem; }
+        .project-carousel .carousel-sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+        }
+        .project-carousel .carousel-controls[hidden] { display: none; }
+        @media (max-width: 850px) {
+            .project-carousel .carousel-track > .project-link {
+                flex-basis: calc((100% - 24px) / 2);
+            }
+        }
+        @media (max-width: 540px) {
+            .project-carousel .carousel-track > .project-link { flex-basis: 82%; }
+        }
+        /* Without JavaScript, all eight links remain available by scrolling. */
+        .project-carousel:not(.is-ready) .carousel-viewport { overflow-x: auto; }
+    </style>
+
 </head>
 
 
@@ -90,7 +188,11 @@
 
 
 
-        <main class="projects">
+        <main class="projects project-carousel" aria-label="Projects">
+            <div class="carousel-viewport" id="project-carousel" role="region"
+                 aria-roledescription="carousel" aria-label="Project cards"
+                 aria-describedby="carousel-hint" tabindex="0">
+                <div class="carousel-track">
 
 
 
@@ -125,20 +227,30 @@
             </a>
 
 
-            <a href="#project6" class="project-link">
+            <a href="#project6" class="project-link" aria-label="Project Six">
                 <div class="project-card"></div>
             </a>
 
 
-            <a href="#project7" class="project-link">
+            <a href="#project7" class="project-link" aria-label="Project Seven">
                 <div class="project-card"></div>
             </a>
 
 
-            <a href="#project8" class="project-link">
+            <a href="#project8" class="project-link" aria-label="Project Eight">
                 <div class="project-card"></div>
             </a>
 
+                        </div>
+            </div>
+            <div class="carousel-controls" hidden>
+                <button class="carousel-button" type="button" data-direction="-1"
+                        aria-label="Previous project" aria-controls="project-carousel">&#8592;</button>
+                <p class="carousel-hint" id="carousel-hint">Drag to explore · Click a project to read more</p>
+                <button class="carousel-button" type="button" data-direction="1"
+                        aria-label="Next project" aria-controls="project-carousel">&#8594;</button>
+            </div>
+            <p class="carousel-sr-only" aria-live="polite" aria-atomic="true"></p>
         </main>
 
 
@@ -318,6 +430,198 @@
 
     <!-- Homepage wave animation, with a 2x spatial zoom. -->
     <script src="../scripts/waves.js" defer></script>
+
+    <script>
+    (() => {
+        const carousel = document.querySelector('.project-carousel');
+        const viewport = carousel.querySelector('.carousel-viewport');
+        const track = carousel.querySelector('.carousel-track');
+        const originals = Array.from(track.children);
+        const count = originals.length;
+        const status = carousel.querySelector('[aria-live]');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        let offset = 0, stride = 0, cycle = 0;
+        let cardWidth = 0, viewportWidth = 0;
+        let frame = 0, velocity = 0, pointer = null, suppressClick = false;
+        let keyboardNavigation = false;
+
+        // Pointer focus must not realign the track (including touch focus after release).
+        document.addEventListener('pointerdown', () => { keyboardNavigation = false; }, true);
+        document.addEventListener('keydown', () => { keyboardNavigation = true; }, true);
+
+        // One extra set on either side makes every wrap visually identical.
+        // Only the original links participate in keyboard/screen-reader navigation.
+        const copy = (card) => {
+            const clone = card.cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            clone.setAttribute('tabindex', '-1');
+            clone.querySelectorAll('[id]').forEach(node => node.removeAttribute('id'));
+            clone.removeAttribute('id');
+            clone.querySelectorAll('a, button, input, select, textarea, [tabindex]')
+                .forEach(node => node.setAttribute('tabindex', '-1'));
+            return clone;
+        };
+        track.prepend(...originals.map(copy));
+        track.append(...originals.map(copy));
+        const visibleCards = Array.from(track.children);
+        track.querySelectorAll('a, img').forEach(node => node.draggable = false);
+
+        const wrap = value => ((value % cycle) + cycle) % cycle;
+        function render() {
+            if (!cycle) return;
+            offset = wrap(offset);
+            const centerShift = (viewportWidth - cardWidth) / 2;
+            track.style.transform = `translate3d(${centerShift - cycle - offset}px, 0, 0)`;
+            // Project the front of a circular path onto the screen. Each card's
+            // appearance depends on its current position, so wraps stay seamless.
+            const radius = Math.max(viewportWidth * .68, cardWidth * 1.3);
+            visibleCards.forEach((card, index) => {
+                const distance = (index - count) * stride - offset;
+                const angle = distance / radius;
+                if (Math.abs(angle) > Math.PI / 2) {
+                    card.style.opacity = '0';
+                    card.style.pointerEvents = 'none';
+                    return;
+                }
+                card.style.opacity = '1';
+                card.style.pointerEvents = '';
+                const depth = 1 - Math.cos(angle);
+                const shiftX = radius * Math.sin(angle) - distance;
+                const scale = 1 - .55 * depth;
+                const turn = -angle * 180 / Math.PI * .65;
+                card.style.transform = `translate3d(${shiftX}px, ${18 * depth}px, 0) perspective(1000px) rotateY(${turn}deg) scale(${scale})`;
+                card.style.zIndex = String(Math.round(100 * Math.cos(angle)));
+            });
+        }
+        function stop() {
+            cancelAnimationFrame(frame);
+            frame = 0;
+            velocity = 0;
+        }
+        function measure() {
+            const position = stride ? offset / stride : 0;
+            stop();
+            // Read layout dimensions, not transformed bounds: the cards now turn and scale.
+            cardWidth = parseFloat(getComputedStyle(originals[0]).width);
+            viewportWidth = viewport.clientWidth;
+            stride = cardWidth + parseFloat(getComputedStyle(track).columnGap);
+            cycle = stride * count;
+            offset = position * stride;
+            render();
+        }
+        function announce() {
+            const index = Math.round(offset / stride) % count;
+            const card = originals[index];
+            status.textContent = `Project ${index + 1} of ${count}: ${card.getAttribute('aria-label') || card.textContent.trim()}`;
+        }
+        function step(direction) {
+            if (!stride) return;
+            stop();
+            const start = offset;
+            const distance = (Math.round(offset / stride) + direction) * stride - offset;
+            const began = performance.now();
+            function tick(now) {
+                const progress = reducedMotion.matches ? 1 : Math.min((now - began) / 300, 1);
+                offset = start + distance * (1 - Math.pow(1 - progress, 3));
+                render();
+                if (progress < 1) frame = requestAnimationFrame(tick);
+                else { frame = 0; announce(); }
+            }
+            frame = requestAnimationFrame(tick);
+        }
+        function coast() {
+            if (reducedMotion.matches || Math.abs(velocity) < .02) return;
+            let previous = performance.now();
+            function tick(now) {
+                const elapsed = Math.min(now - previous, 32);
+                previous = now;
+                offset += velocity * elapsed;
+                velocity *= Math.exp(-elapsed / 250);
+                render();
+                if (Math.abs(velocity) > .02) frame = requestAnimationFrame(tick);
+                else { frame = 0; announce(); }
+            }
+            frame = requestAnimationFrame(tick);
+        }
+        viewport.addEventListener('pointerdown', event => {
+            if (!event.isPrimary || event.button !== 0) return;
+            stop();
+            suppressClick = false;
+            pointer = { id: event.pointerId, x: event.clientX, y: event.clientY,
+                lastX: event.clientX, time: performance.now(), dragging: false };
+        });
+        viewport.addEventListener('pointermove', event => {
+            if (!pointer || pointer.id !== event.pointerId) return;
+            const dx = event.clientX - pointer.x;
+            const dy = event.clientY - pointer.y;
+            if (!pointer.dragging) {
+                if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+                if (Math.abs(dy) > Math.abs(dx)) { pointer = null; return; }
+                pointer.dragging = true;
+                suppressClick = true;
+                viewport.setPointerCapture(event.pointerId);
+                viewport.classList.add('is-dragging');
+            }
+            event.preventDefault();
+            const now = performance.now();
+            const delta = pointer.lastX - event.clientX;
+            velocity = Math.max(-3, Math.min(3, delta / Math.max(now - pointer.time, 1)));
+            offset += delta;
+            pointer.lastX = event.clientX;
+            pointer.time = now;
+            render();
+        });
+        function release(event) {
+            if (!pointer || pointer.id !== event.pointerId) return;
+            const dragged = pointer.dragging;
+            if (performance.now() - pointer.time > 80) velocity = 0;
+            pointer = null;
+            viewport.classList.remove('is-dragging');
+            if (viewport.hasPointerCapture(event.pointerId)) viewport.releasePointerCapture(event.pointerId);
+            if (dragged && event.type === 'pointerup') coast();
+            else stop();
+        }
+        window.addEventListener('pointerup', release);
+        window.addEventListener('pointercancel', release);
+        viewport.addEventListener('lostpointercapture', release);
+        viewport.addEventListener('dragstart', event => event.preventDefault());
+        viewport.addEventListener('click', event => {
+            if (suppressClick && event.detail !== 0) {
+                event.preventDefault();
+                event.stopPropagation();
+                suppressClick = false;
+            }
+        }, true);
+        carousel.querySelectorAll('[data-direction]').forEach(button => {
+            button.addEventListener('click', () => step(Number(button.dataset.direction)));
+        });
+        viewport.addEventListener('keydown', event => {
+            if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+            event.preventDefault();
+            step(event.key === 'ArrowRight' ? 1 : -1);
+            viewport.focus({ preventScroll: true });
+        });
+        originals.forEach((card, index) => {
+            card.addEventListener('focus', () => {
+                viewport.scrollLeft = 0;
+                if (!keyboardNavigation) return;
+                stop();
+                // Reveal the actual focused link, even if its visual duplicate was visible.
+                offset = index * stride;
+                render();
+            });
+        });
+        // The transform owns horizontal positioning; native focus scrolling must not shift it.
+        viewport.addEventListener('scroll', () => { viewport.scrollLeft = 0; });
+        document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
+        reducedMotion.addEventListener('change', stop);
+        carousel.querySelector('.carousel-controls').hidden = false;
+        carousel.classList.add('is-ready');
+        new ResizeObserver(measure).observe(viewport);
+        measure();
+    })();
+    </script>
+
 </body>
 
 </html>
