@@ -220,14 +220,19 @@ div#projects-page{
     overflow-x: hidden;
     display: none;
 }
+div#projects-page img{
+    height: 20rem;
+    width: 20rem;
+}
 
-div#projects-page header {
+div#projects-page h1 {
     text-align: center;
     font-size: clamp(1rem, 4vw + 1rem, 2rem);
 }
 
-div#projects-page header1 {
-    margin: 2rem;
+div#projects-page h2 {
+    margin-left: 2rem;
+    margin-top: 4rem;
 }
 
 div#projects-page ul li::marker {
@@ -289,9 +294,9 @@ div#meetings-page h3 {
 }
 
 div#meetings-page *#endOfText {
-    margin-bottom: 4rem;
+    margin-bottom: 8rem;
 }
 div#meetings-page a#endOfText{
     display: inline-block;
-    margin-bottom: 4rem;
+    margin-bottom: 8rem;
 }
