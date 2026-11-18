@@ -1,4 +1,12 @@
-/* Shared optional theme. Original page styles remain the default. */
+/* Load standard skins as render-blocking CSS, before any page can paint.
+   Their data-theme selectors keep inactive skins out of the cascade. */
+@import url("../themes/appstate/theme.css");
+@import url("../themes/original/theme.css");
+@import url("../themes/classic/theme.css");
+@import url("../themes/luke/theme.css");
+@import url("../themes/matrix/theme.css");
+
+/* Shared theme controls. */
 :root {
     --theme-accent: #c7c2ff;
     --theme-text: #f5f5f0;
