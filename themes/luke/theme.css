@@ -1,11 +1,10 @@
 /* Luke uses the standard layout with its wave palette in scripts/waves.js. */
-.hero-title { font-size: clamp(1rem, 3.6vw, 3.2rem); }
-.hero-subtitle { font-size: clamp(.7rem, 1.8vw, 1.5rem); color: #000080; }
-.typed-text.is-typing { color: white; border-color: #ffffff; }
+html[data-theme="luke"] .hero-title { font-size: clamp(1rem, 3.6vw, 3.2rem); }
+html[data-theme="luke"] .hero-subtitle { font-size: clamp(.7rem, 1.8vw, 1.5rem); color: #000080; }
+html[data-theme="luke"] .typed-text.is-typing { color: white; border-color: #ffffff; }
 
-#otherMembers,
-.upcoming-card,
-.previous-meeting {
+html[data-theme="luke"] .upcoming-card,
+html[data-theme="luke"] .previous-meeting {
     background: #c0c0c0;
     border: 3px outset #eee;
     border-radius: 0;
@@ -15,10 +14,9 @@
 }
 
 /* Ballpark menu-style project cards */
-#otherMembers,
-.upcoming-card,
-.previous-meeting,
-.project-card {
+html[data-theme="luke"] .upcoming-card,
+html[data-theme="luke"] .previous-meeting,
+html[data-theme="luke"] .project-card {
     box-sizing: border-box;
     background: #fff5dc;
     border: 6px double #b52b25;
@@ -26,6 +24,7 @@
     color: #3b241b;
     text-shadow: none;
     backdrop-filter: none;
+    
 
     /* Subtle paper highlights and a mustard-yellow offset */
     box-shadow:
@@ -40,10 +39,9 @@
 }
 
 @media (hover: hover) {
-    #otherMembers:hover,
-    .upcoming-card:hover,
-    .previous-meeting:hover,
-    .project-card:hover {
+    html[data-theme="luke"] .upcoming-card:hover,
+    html[data-theme="luke"] .previous-meeting:hover,
+    html[data-theme="luke"] .project-card:hover {
         background: #fff5dc;
         transform: translateY(-3px) rotate(-0.4deg);
         box-shadow:
@@ -54,72 +52,73 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    #otherMembers,
-    .upcoming-card,
-    .previous-meeting,
-    .project-card {
+    html[data-theme="luke"] .upcoming-card,
+    html[data-theme="luke"] .previous-meeting,
+    html[data-theme="luke"] .project-card {
         transition: none;
     }
 
-    #otherMembers:hover,
-    .upcoming-card:hover,
-    .previous-meeting:hover,
-    .project-card:hover {
+    html[data-theme="luke"] .upcoming-card:hover,
+    html[data-theme="luke"] .previous-meeting:hover,
+    html[data-theme="luke"] .project-card:hover {
         transform: none;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    #otherMembers,
-    .upcoming-card,
-    .previous-meeting,
-    .project-card {
+    html[data-theme="luke"] .upcoming-card,
+    html[data-theme="luke"] .previous-meeting,
+    html[data-theme="luke"] .project-card {
         transition: none;
     }
 
-    #otherMembers,
-    .upcoming-card,
-    .previous-meeting,
-    .project-card:hover {
+    html[data-theme="luke"] .upcoming-card,
+    html[data-theme="luke"] .previous-meeting,
+    html[data-theme="luke"] .project-card:hover {
         transform: none;
     }
 }
 
-#otherMembers h1, .meeting-title, .previous-info h3, .previous-info p, .meeting-expanded {
+html[data-theme="luke"] .meeting-title, 
+html[data-theme="luke"] .previous-info h3, 
+html[data-theme="luke"] .previous-info p, 
+html[data-theme="luke"] .meeting-expanded {
     color: #000;
     text-shadow: none;
 }
 
-.meeting-expanded h4, .meeting-links a {
+html[data-theme="luke"] .meeting-expanded h4, 
+html[data-theme="luke"] .meeting-links a {
     color: #000;
 }
 
-.meeting-date {
+html[data-theme="luke"] .meeting-date {
     color: #eb8963;
     text-shadow: none;
 }
 
-.meeting-details {
+html[data-theme="luke"] .meeting-details {
     color: #b1a194;
     text-shadow: none;
 }
 
-.meeting-description, .meeting-link {
+html[data-theme="luke"] .meeting-description, 
+html[data-theme="luke"] .meeting-link {
     color: #000;
     text-shadow: none;
 }
 
-.previous-date {
+html[data-theme="luke"] .previous-date {
     color: #eb8963;
     text-shadow: none;
 }
 
 
-#otherMembers li {
+html[data-theme="luke"] #otherMembers li {
     color: black;
 }
 /* Shared hot-dog shape and styling */
-div.officer:is(
+html[data-theme="luke"] div.officer:is(
     #president,
     #vicePresident,
     #academicAdvisor
@@ -164,7 +163,7 @@ div.officer:is(
 }
 
 /* A zigzag of sauce across the top */
-div.officer:is(
+html[data-theme="luke"] div.officer:is(
     #president,
     #vicePresident,
     #academicAdvisor
@@ -195,24 +194,24 @@ div.officer:is(
 } 
 
 /* President: classic frank with yellow mustard */
-div.officer:is(#president) {
+html[data-theme="luke"] div.officer:is(#president) {
     --sausage: #a83d25;
     --topping: #ffda24;
 }
 
 /* Vice President: relish green on a deeper grilled frank */
-div.officer:is(#vicePresident) {
+html[data-theme="luke"] div.officer:is(#vicePresident) {
     --sausage: #873c26;
     --topping: #a9dc4a;
 }
 
 /* Academic Advisor: smoky BBQ with spicy orange sauce */
-div.officer:is(#academicAdvisor) {
+html[data-theme="luke"] div.officer:is(#academicAdvisor) {
     --sausage: #693120;
     --topping: #ff9840;
 }
 
-div.officer:is(
+html[data-theme="luke"] div.officer:is(
     #president,
     #vicePresident,
     #academicAdvisor
@@ -239,8 +238,8 @@ div.officer:is(
 }
 
 /* Details button and presentation links */
-.previous-meeting .details-button,
-.previous-meeting .meeting-links a {
+html[data-theme="luke"] .previous-meeting .details-button,
+html[data-theme="luke"] .previous-meeting .meeting-links a {
     display: inline-block;
     background: #ffda24;
     color: #111;
@@ -255,15 +254,15 @@ div.officer:is(
 }
 
 /* Keep hover backgrounds solid */
-.previous-meeting .details-button:hover,
-.previous-meeting .meeting-links a:hover {
+html[data-theme="luke"] .previous-meeting .details-button:hover,
+html[data-theme="luke"] .previous-meeting .meeting-links a:hover {
     background: #ffe66b;
     color: #111;
 }
 
 /* Visible keyboard focus */
-.previous-meeting .details-button:focus-visible,
-.previous-meeting .meeting-links a:focus-visible {
+html[data-theme="luke"] .previous-meeting .details-button:focus-visible,
+html[data-theme="luke"] .previous-meeting .meeting-links a:focus-visible {
     outline: 3px solid #111;
     outline-offset: 3px;
 }
