@@ -161,7 +161,7 @@ html[data-theme="classic"] .classic-desktop { display: block; }
     html[data-theme="classic"] .hero-copy { padding-inline: 12px; }
     html[data-theme="classic"] .project-section { padding: 64px 24px; }
 }
-html[data-theme="classic"] .theme-toggle { font-family: "Courier New", monospace; }
+html[data-theme="classic"] .theme-toggle { font-family: "Courier New", monospace; text-decoration: underline; }
 html[data-theme="classic"] .meeting-expanded h4 { color: #000080; }
 
 
