@@ -10,84 +10,33 @@
 
     <title>Projects</title>
 
-    <link rel="stylesheet" href="../css/projects-style.css">
+    <link rel="stylesheet" href="../css/projects-style.css?v=project-images">
     <link rel="stylesheet" href="../css/themes.css">
     <script src="../scripts/theme.js"></script>
 </head>
 
 
 
+    <!-- NAVIGATION -->
 
 
 <body>
-
-
-
-
-
-    <!-- ========================================
-
-         MAIN SPLASH SCREEN
-
-    ========================================= -->
-
-
-
     <section class="splash">
         <canvas class="wave-background" data-variant="projects" aria-hidden="true"></canvas>
-
-
-
-
-
-
-
-        <!-- --------------------
-
-             NAVIGATION
-
-        --------------------- -->
-
-
-
         <nav>
-
-
-
             <a href="../index.html">Home</a>
-
-
 
             <a href="./projects.html">Projects</a>
 
-
-
             <a href="members.html">Members</a>
-
-
 
             <a href="meetings.html">Meetings</a>
 
-
-
             <div class="theme-control">
-        <button class="theme-toggle" type="button" aria-expanded="false" aria-controls="theme-options">Theme</button>
-        <div class="theme-options" id="theme-options" hidden></div>
-    </div>
-</nav>
-
-
-
-
-
-
-
-        <!-- --------------------
-
-             PROJECT BOXES
-
-        --------------------- -->
-
+            <button class="theme-toggle" type="button" aria-expanded="false" aria-controls="theme-options">Theme</button>
+            <div class="theme-options" id="theme-options" hidden></div>
+            </div>
+        </nav>
 
 
         <main class="projects">
@@ -95,32 +44,37 @@
 
 
             <a href="#project1" class="project-link">
-                <div class="project-card">
-                    RiverCam AI: Computer Vision Flood Monitoring
+                <div class="project-card project-card--photo">
+                    <img class="project-thumbnail" src="../images/projects/RiverCam%20AI.JPG" alt="" width="4032" height="3024">
+                    <span class="project-card-caption"><span class="project-card-title">RiverCam AI: Computer Vision Flood Monitoring</span></span>
                 </div>
             </a>
 
             <a href="#project2" class="project-link">
-                <div class="project-card">
-                    AppAqua: Machine Learning for Water Quality Data
+                <div class="project-card project-card--photo">
+                    <img class="project-thumbnail" src="../images/projects/AppAqua.jpeg" alt="" width="1284" height="1707">
+                    <span class="project-card-caption"><span class="project-card-title">AppAqua: Machine Learning for Water Quality Data</span></span>
                 </div>
             </a>
 
             <a href="#project3" class="project-link">
-                <div class="project-card">
-                    AppMAIS: AI and Bee Research
+                <div class="project-card project-card--photo">
+                    <img class="project-thumbnail" src="../images/projects/AppMAIS.jpg" alt="" width="900" height="580">
+                    <span class="project-card-caption"><span class="project-card-title">AppMAIS: AI and Bee Research</span></span>
                 </div>
             </a>
 
             <a href="#project4" class="project-link">
-                <div class="project-card">
-                    AI for Glaucoma Research
+                <div class="project-card project-card--photo">
+                    <img class="project-thumbnail" src="../images/projects/glaucoma.png" alt="" width="1200" height="800">
+                    <span class="project-card-caption"><span class="project-card-title">AI for Glaucoma Research</span></span>
                 </div>
             </a>
 
             <a href="#project5" class="project-link">
-                <div class="project-card">
-                    Weather-Aware Robotic Guide Dog
+                <div class="project-card project-card--photo">
+                    <img class="project-thumbnail" src="../images/projects/Unitree%20Guide.png" alt="" width="1214" height="852">
+                    <span class="project-card-caption"><span class="project-card-title">Weather-Aware Robotic Guide Dog</span></span>
                 </div>
             </a>
 
@@ -146,7 +100,8 @@
 
 
     <!-- PROJECT 1: RiverCam AI -->
-<section id="project1" class="project-section">
+<section id="project1" class="project-section project-section--with-image">
+    <div class="project-description">
     <h2>RiverCam AI: Computer Vision Flood Monitoring</h2>
     <p>
         RiverCam AI explores the use of computer vision and
@@ -159,10 +114,13 @@
         monitoring techniques that support flood research and
         early-warning systems.
     </p>
+    </div>
+    <img class="project-detail-image" src="../images/projects/RiverCam%20AI.JPG" alt="Fieldwork beside a covered bridge, with a floating instrument on the river." width="4032" height="3024" loading="lazy" decoding="async">
 </section>
 
 <!-- PROJECT 2: AppAqua -->
-<section id="project2" class="project-section">
+<section id="project2" class="project-section project-section--with-image">
+    <div class="project-description">
     <h2>AppAqua: Machine Learning for Water Quality Data</h2>
     <p>
         AppAqua is an interdisciplinary research initiative at
@@ -176,10 +134,13 @@
         conductivity, and pH, incorporating seasonal patterns
         and external hydrological and meteorological data.
     </p>
+    </div>
+    <img class="project-detail-image" src="../images/projects/AppAqua.jpeg" alt="Three people conducting fieldwork beside a water-monitoring installation." width="1284" height="1707" loading="lazy" decoding="async">
 </section>
 
 <!-- PROJECT 3: AppMAIS -->
-<section id="project3" class="project-section">
+<section id="project3" class="project-section project-section--with-image">
+    <div class="project-description">
     <h2>AppMAIS: AI and Bee Research</h2>
     <p>
         AppMAIS highlights interdisciplinary research at
@@ -192,10 +153,13 @@
         scientific questions beyond traditional computer
         science applications.
     </p>
+    </div>
+    <img class="project-detail-image" src="../images/projects/AppMAIS.jpg" alt="Four beehives fitted with monitoring equipment in a wooded apiary." width="900" height="580" loading="lazy" decoding="async">
 </section>
 
 <!-- PROJECT 4: Glaucoma Research -->
-<section id="project4" class="project-section">
+<section id="project4" class="project-section project-section--with-image">
+    <div class="project-description">
     <h2>AI for Glaucoma Research</h2>
     <p>
         Glaucoma research at Appalachian State University
@@ -207,10 +171,13 @@
         computational techniques to contribute to healthcare
         and biomedical discovery.
     </p>
+    </div>
+    <img class="project-detail-image" src="../images/projects/glaucoma.png" alt="A presenter explaining machine-learning methods for glaucoma research to an audience." width="1200" height="800" loading="lazy" decoding="async">
 </section>
 
 <!-- PROJECT 5: Unitree Robot -->
-<section id="project5" class="project-section">
+<section id="project5" class="project-section project-section--with-image">
+    <div class="project-description">
     <h2>Weather-Aware Robotic Guide Dog</h2>
     <p>
         This robotics project investigates autonomous navigation
@@ -224,6 +191,8 @@
         technologies relevant to future assistive robotics,
         including robotic guide dogs.
     </p>
+    </div>
+    <img class="project-detail-image" src="../images/projects/Unitree%20Guide.png" alt="A simulated quadruped robot following a dotted route around obstacles." width="1214" height="852" loading="lazy" decoding="async">
 </section>
 
 
@@ -279,11 +248,7 @@
 
 
 
-    <!-- ========================================
-
-         PROJECT 8
-
-    ========================================= -->
+    <!-- PROJECT 8 -->
 
 
 

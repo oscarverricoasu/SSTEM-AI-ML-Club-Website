@@ -3,6 +3,14 @@
     const base = new URL("../", document.currentScript.src);
     const key = "aiml-club-theme";
     const layout = document.documentElement.dataset.layout || "standard";
+    // This script runs in the head, before page content can paint. Keep the
+    // base styles out of view until the initial theme's CSS and module are ready.
+    const initialThemeGuard = document.createElement("style");
+    initialThemeGuard.textContent = `
+        html { visibility: hidden !important; }
+        *, *::before, *::after { transition: none !important; }
+    `;
+    document.head.append(initialThemeGuard);
     const ready = document.readyState === "loading"
         ? new Promise(resolve => document.addEventListener("DOMContentLoaded", resolve, { once: true }))
         : Promise.resolve();
@@ -17,7 +25,7 @@
         try { localStorage.setItem(key, id); } catch { /* The picker still works without storage. */ }
     }
     // Give existing page animations the saved preference while the registry loads.
-    document.documentElement.dataset.theme = savedTheme() || "original";
+    document.documentElement.dataset.theme = layout === "explorer" ? "file-explorer" : savedTheme() || "appstate";
 
     async function start() {
         const response = await fetch(new URL("themes/themes.json", base)); // reads theme from json file
@@ -73,7 +81,8 @@
                 activeLink?.remove();
                 activeLink = link;
                 activeModule = module;
-                module?.mount();
+                await module?.mount();
+                if (currentRequest !== request) return;
                 if (persist && theme.layout === "standard") save(theme.id);
                 document.querySelectorAll("[data-theme-option]").forEach(option => {
                     option.setAttribute("aria-pressed", String(option.dataset.themeOption === theme.id));
@@ -144,5 +153,10 @@
             button.disabled = true;
             button.textContent = "Themes unavailable";
         });
+    }).finally(() => {
+        // Commit the final styles while transitions are disabled. Otherwise the
+        // browser can animate from the base page colors after revealing it.
+        void document.documentElement.offsetHeight;
+        initialThemeGuard.remove();
     });
 })();
